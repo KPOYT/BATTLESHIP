@@ -7,8 +7,8 @@ using namespace std;
 class GraphycalElement {
 	protected:
 		void drawText(int x, int y, string str, int textColor = 15, int backgroundColor = 0){
-			gotoXY(x,y);
 			setColor(textColor,backgroundColor);
+			gotoXY(x,y);
 			cout<<str;
 		}
 

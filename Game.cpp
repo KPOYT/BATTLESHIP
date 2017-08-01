@@ -49,7 +49,6 @@ void Game::draw() {
 	botField->draw();
 
 	HANDLE hThr = CreateThread( NULL, 0,(LPTHREAD_START_ROUTINE) timerUpdate, (void*)&params, 0, NULL );
-	
 }
 
 void Game::start() {

@@ -1,6 +1,12 @@
 #include <iostream>
 #include <windows.h>
+#include <array>
+#include "Bot.h"
+
+#ifndef SHIP_H
+#define SHIP_H
 #include "Ship.h"
+#endif
 
 #ifndef GRAPHYCALELEMENT_H
 #define GRAPHYCALELEMENT_H
@@ -38,8 +44,8 @@ class Field : public GraphycalElement {
 		int leftShips();
 		int const checkCell(COORD);
 		int const checkCell(int, int);
-		Ship* getShipByPosition(COORD);
-		Ship* getShipByPosition(int, int);
+		Ship* const getShipByPosition(COORD);
+		Ship* const getShipByPosition(int, int);
 		bool checkKilledShip(Ship*);
 		bool type;
 
@@ -62,11 +68,14 @@ class Field : public GraphycalElement {
 		bool checkPositionAroundShip(Ship*, COORD);
 		void clearField();
 		void findPlaceToSheep(int const, int const);
-		Ship* getCurrentShip();
+		void updateBotGrid();
+		void updateBotShips();
+		Ship* const getCurrentShip();
 
+		Bot bot;
 		COORD position_;
 		COORD oldPosition_;
-		Ship ships[10];
+		Ship* ships[10];
 		int grid[10][10];
 		int x_;
 		int y_;

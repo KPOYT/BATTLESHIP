@@ -3,7 +3,6 @@
 #include "ExitPanel.h"
 #include "Field.h"
 #include "Cell.h"
-#include "Bot.h"
 
 void Field::generate() {
 	int const maxShips = 10;
@@ -25,7 +24,7 @@ void Field::clearField(){
 }
 
 void Field::findPlaceToSheep(int const shipType, int const index){
-	Ship ship(shipType);
+	Ship* ship = new Ship(shipType);
 	int const maxShips = 10;
 	bool find = false;
 	
@@ -43,7 +42,7 @@ void Field::findPlaceToSheep(int const shipType, int const index){
 			for(int j = -1; j <= 1; j++)
 			{
 				if(rotate < 5){
-					if(x+i >= maxShips && i<shipType) {
+					if(x+i >= maxShips && i < shipType) {
 						clear = false;
 						break;
 					}
@@ -73,8 +72,8 @@ void Field::findPlaceToSheep(int const shipType, int const index){
 					COORD pos;
 					pos.X = x+i;
 					pos.Y = y;
-					ship.addCell(pos);
-					ship.type = ship.horizontal;
+					ship->addCell(pos);
+					ship->type = ship->horizontal;
 					ships[index] = ship;
 				}
 				else
@@ -83,8 +82,8 @@ void Field::findPlaceToSheep(int const shipType, int const index){
 					COORD pos;
 					pos.X = x;
 					pos.Y = y+i;
-					ship.addCell(pos);
-					ship.type = ship.vertical;
+					ship->addCell(pos);
+					ship->type = ship->vertical;
 					ships[index] = ship;
 				}
 			}
@@ -208,7 +207,9 @@ int Field::walk() {
 }
 
 int Field::walkByBot() {
-	Bot bot(this);
+	updateBotGrid();
+	updateBotShips();
+
 	COORD coord = bot.findCellToStrike();
 	position_ = coord;
 
@@ -233,9 +234,23 @@ int Field::walkByBot() {
 	return unsuccess;
 }
 
+void Field::updateBotGrid() {
+	for(int i = 0; i < 10; i++){
+		for(int j = 0; j < 10; j++){
+			bot.grid[i][j] = grid[i][j];
+		}
+	}
+}
+
+void Field::updateBotShips() {
+	for(int i = 0; i < 10; i++){
+		bot.ships[i] = ships[i];
+	}
+}
+
 void Field::fillCellsAroundKilledShip() {
 	Ship* ship = getCurrentShip();
-
+	
 	if(!checkKilledShip(ship)) return;
 	COORD coord;
 
@@ -267,7 +282,7 @@ int Field::leftShips(){
 	int max = 10;
 
 	for(int s = 0; s < 10; s++){
-		if(checkKilledShip(&ships[s])){
+		if(checkKilledShip(ships[s])){
 			max--;
 		}
 	};
@@ -275,37 +290,37 @@ int Field::leftShips(){
 	return max;
 }
 
-Ship* Field::getCurrentShip(){
+Ship* const Field::getCurrentShip(){
 	for(int s = 0; s < 10; s++){
-		if(ships[s].checkCell(position_))
+		if(ships[s]->checkCell(position_))
 		{
-			return &ships[s];
+			return ships[s];
 		}
 	}
 
 	return NULL;
 }
 
-Ship* Field::getShipByPosition(COORD coord){
+Ship* const Field::getShipByPosition(COORD coord){
 	for(int s = 0; s < 10; s++){
-		if(ships[s].checkCell(coord))
+		if(ships[s]->checkCell(coord))
 		{
-			return &ships[s];
+			return ships[s];
 		}
 	}
 
 	return NULL;
 }
 
-Ship* Field::getShipByPosition(int x, int y){
+Ship* const Field::getShipByPosition(int x, int y){
 	COORD coord;
 	coord.X = x;
 	coord.Y = y;
 
 	for(int s = 0; s < 10; s++){
-		if(ships[s].checkCell(coord))
+		if(ships[s]->checkCell(coord))
 		{
-			return &ships[s];
+			return ships[s];
 		}
 	}
 

@@ -13,6 +13,7 @@ class Game {
 		Game(){
 			status = userWay;
 			startTime_ = clock() / CLOCKS_PER_SEC;
+			pauseTime_ = new int(0);
 		};
 		~Game(){
 			delete timerPanel;
@@ -37,5 +38,6 @@ class Game {
 		Field* userField;
 		Field* botField;
 		int startTime_;
+		int* pauseTime_;
 		int status;
 };
