@@ -35,7 +35,11 @@ class Field : public GraphycalElement {
 			position_.X = 0;
 			position_.Y = 0;
 		};
-		~Field(){};
+		~Field(){
+			int size = sizeof(ships) / sizeof(Ship);
+			for(int i = 0; i < size; i++)
+				delete ships[i];
+		};
 		
 		int walk();
 		void draw();
