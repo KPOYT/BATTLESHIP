@@ -2,6 +2,17 @@
 #include <process.h>
 #include "Game.h"
 
+Game::Game(){
+	status_ = userTurn;
+	startTime_ = clock() / CLOCKS_PER_SEC;
+};
+
+Game::~Game(){
+	delete timerPanel_;
+	delete userField_;
+	delete botField_;
+};
+
 typedef struct
 {
     TimerPanel* panel;
@@ -15,38 +26,38 @@ void timerUpdate(void* pParams){
 		int time = clock() / CLOCKS_PER_SEC - ptr->start;
 		ptr->panel->redrawTimer(time);
 		Sleep(1000);
-	}while(!ptr->panel->finished);
+	}while(!ptr->panel->isFinished);
 }
 
 void Game::draw() {
 	system("cls");
 
-	timerPanel = new TimerPanel(35, 0);
-	timerPanel->show();
+	timerPanel_ = new TimerPanel(35, 0);
+	timerPanel_->show();
 
 	MsParams static params;
-	params.panel = timerPanel;
+	params.panel = timerPanel_;
 	params.start = startTime_;
 	
-	state = new StatePanel(38, 10, "Turn:");
-	state->show();
-	state->redrawPanel("Your", 2);
+	statePanel_ = new StatePanel(38, 10, "Turn:");
+	statePanel_->show();
+	statePanel_->redrawPanel("Your", 2);
 
-	userState = new StatePanel(4, 5);
-	userState->show();
+	userStatePanel_ = new StatePanel(4, 5);
+	userStatePanel_->show();
 
-	botState = new StatePanel(70, 5);
-	botState->show();
+	botStatePanel_ = new StatePanel(70, 5);
+	botStatePanel_->show();
 
-	userField = new Field(14, 1, 22, 22);
-	userField->generate();
-	userField->type = userField->open;
-	userField->draw();
+	userField_ = new Field(14, 1, 22, 22);
+	userField_->generate();
+	userField_->isOpenShips = true;
+	userField_->draw();
 
-	botField = new Field(44, 1, 22, 22);
-	botField->generate();
-	botField->type = botField->close;
-	botField->draw();
+	botField_ = new Field(44, 1, 22, 22);
+	botField_->generate();
+	botField_->isOpenShips = false;
+	botField_->draw();
 
 	HANDLE hThr = CreateThread( NULL, 0,(LPTHREAD_START_ROUTINE) timerUpdate, (void*)&params, 0, NULL );
 }
@@ -55,60 +66,60 @@ void Game::start() {
 	do
 	{
 		int success;
-		if(status == userWay)
+		if(status_ == userTurn)
 		{
-			state->redrawPanel("Your", 2);
+			statePanel_->redrawPanel("Your", 2);
 
-			success = botField->walk();
+			success = botField_->walk();
 
-			if(success == botField->unsuccess)
-				status = botWay;
-			else if(success == botField->gameover)
-				status = gameover;
+			if(success == botField_->unsuccessful)
+				status_ = botTurn;
+			else if(success == botField_->gameover)
+				status_ = gameover;
 			else {
-				botState->redrawPanel(botField->leftShips());
+				botStatePanel_->redrawPanel(botField_->leftShips());
 				
-				if (botField->leftShips() == 0) {
-					timerPanel->finished = true;
+				if (botField_->leftShips() == 0) {
+					timerPanel_->isFinished = true;
 
 					int time = clock() / CLOCKS_PER_SEC - startTime_;
 					StateMenu menu;
-					menu.draw(userField->leftShips(), botField->leftShips(), time);
-					botField->draw();
+					menu.draw(userField_->leftShips(), botField_->leftShips(), time);
+					botField_->draw();
 					_getch();
 
-					status = gameover;
+					status_ = gameover;
 				}
 			}
 		}
-		else if(status == botWay)
+		else if(status_ == botTurn)
 		{
-			state->redrawPanel("Bot", 4);
+			statePanel_->redrawPanel("Bot", 4);
 
-			success = userField->walkByBot();
+			success = userField_->walkByBot();
 			
-			if(success == userField->unsuccess)
-				status = userWay;
-			else if(success == userField->gameover)
-				status = gameover;
+			if(success == userField_->unsuccessful)
+				status_ = userTurn;
+			else if(success == userField_->gameover)
+				status_ = gameover;
 			else {
-				userState->redrawPanel(userField->leftShips());
+				userStatePanel_->redrawPanel(userField_->leftShips());
 
-				if (userField->leftShips() == 0) {
-					timerPanel->finished = true;
+				if (userField_->leftShips() == 0) {
+					timerPanel_->isFinished = true;
 
 					int time = clock() / CLOCKS_PER_SEC - startTime_;
 					StateMenu menu;
-					menu.draw(userField->leftShips(), botField->leftShips(), time);
-					botField->draw();
+					menu.draw(userField_->leftShips(), botField_->leftShips(), time);
+					botField_->draw();
 					_getch();
 					
-					status = gameover;
+					status_ = gameover;
 				}
 			}
 		}
 	}
-	while (status != gameover);
-	timerPanel->finished = true;
-	status = userWay;
+	while (status_ != gameover);
+	timerPanel_->isFinished = true;
+	status_ = userTurn;
 }

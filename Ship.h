@@ -13,27 +13,12 @@ class Ship {
 			size = size_;
 		};
 
-		void addCell(COORD const cell) {
-			for(int i = 0; i < size; i++) {
-				if(cells[i].X < 0 || cells[i].Y < 0){
-					cells[i] = cell;
-					break;
-				}
-			}
-		};
-		bool checkCell(COORD const cell) {
-			for(int i = 0; i < size; i++) {
-				if(cells[i].X == cell.X && cells[i].Y == cell.Y){
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		COORD cells[4];
+		void addCell(COORD const cell);
+		bool const checkCell(COORD const cell);
+		
 		int size;
 		int type;
+		COORD cells[4];
 
 		enum ShipState
 		{

@@ -18,45 +18,28 @@ class Menu : public GraphycalElement {
 		};
 
 		Menu(
-			COORD const pos, 
-			string const desc = "Are you sure?")
+			 COORD const pos, 
+			 string const desc = "Are you sure?")
 		{
 			position = pos;
 			description = desc;
 		};
 
 		Menu(
-			int const x,
-			int const y,
-			string const desc = "Are you sure?")
+			 int const x,
+			 int const y,
+			 string const desc = "Are you sure?")
 		{
 			position.X = x;
 			position.Y = y;
 			description = desc;
 		};
 
-		virtual int show();
+		virtual int const show();
 	protected:
 		virtual void redrawMenu(int){};
-		virtual int checkKeys(int mode){ return mode; };
+		virtual int const checkKeys(int mode){ return mode; };
 
 		COORD position;
 		string description;
 };
-
-int Menu::show()
-{
-	int mode = 0;
-	bool choise = false;
-
-	setColor(0,0);
-    system("cls");
-	
-	drawText(position.X, position.Y, description);
-
-	redrawMenu(mode);
-
-	mode = checkKeys(mode);
-	
-	return mode;
-}

@@ -5,13 +5,34 @@
 
 HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
-BOOL ShowConsoleCursor(BOOL bShow);
+BOOL const ShowConsoleCursor(BOOL const bShow);
+int const StartGame();
 
-void drawField();
-
-int main() {
+void main() {
 	ShowConsoleCursor(FALSE);
+	StartGame();
+}
 
+BOOL const ShowConsoleCursor(BOOL const bShow)
+{
+    CONSOLE_CURSOR_INFO cci;
+
+    if(hStdOut == INVALID_HANDLE_VALUE)
+        return FALSE;
+
+    if(!GetConsoleCursorInfo(hStdOut, &cci))
+        return FALSE;
+
+    cci.bVisible = bShow;
+
+    if(!SetConsoleCursorInfo(hStdOut,&cci))
+        return FALSE;
+
+    return TRUE;
+}
+
+int const StartGame()
+{
 	MainMenu* mainMenu = new MainMenu;
 	ExitMenu* exitMenu = new ExitMenu(33, 10);
 	Game* game;
@@ -35,22 +56,6 @@ int main() {
 		}
 	}
 	while (exitMenuChoise != 1);
-}
 
-BOOL ShowConsoleCursor(BOOL bShow)
-{
-    CONSOLE_CURSOR_INFO cci;
-
-    if(hStdOut == INVALID_HANDLE_VALUE)
-        return FALSE;
-
-    if(!GetConsoleCursorInfo(hStdOut, &cci))
-        return FALSE;
-
-    cci.bVisible = bShow;
-
-    if(!SetConsoleCursorInfo(hStdOut,&cci))
-        return FALSE;
-
-    return TRUE;
+	return exitMenuChoise;
 }

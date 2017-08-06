@@ -29,7 +29,7 @@ class Panel : public GraphycalElement {
 		~Panel(){
 		};
 
-		virtual int show(){ return -1; };
+		virtual const int show(){ return -1; };
 
 	protected:
 		virtual void redrawMenu(int mode, int textColor = 15, int backgroundColor = 0){};

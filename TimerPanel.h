@@ -8,14 +8,14 @@ class TimerPanel : public Panel {
 		TimerPanel(
 			string const desc = "Game time:"):Panel(desc)
 		{
-			finished = false;
+			isFinished = false;
 		};
 
 		TimerPanel(
 			COORD const pos, 
 			string const desc = "Game time:"):Panel(pos, desc)
 		{
-			finished = false;
+			isFinished = false;
 		};
 
 		TimerPanel(
@@ -23,42 +23,18 @@ class TimerPanel : public Panel {
 			int const y, 
 			string const desc = "Game time:"):Panel(x, y, desc)
 		{
-			finished = false;
+			isFinished = false;
 		};
 
 		~TimerPanel(){
 			fillLine(" ", timer_.length(), position.X, position.Y + 1, false);
 		};
 
-		int show()
-		{  
-			int mode = 0;
-			bool choise = false;
-	
-			drawText(position.X, position.Y, description);
+		int const show();
 
-			redrawTimer(mode);
-	
-			return mode;
-		}
+		void redrawTimer(int const time, int const textColor = 15, int const backgroundColor = 0);
 
-		void redrawTimer(int time, int textColor = 15, int backgroundColor = 0) {
-			setColor(0,0);
-			timer_.clear();
-
-			timer_.push_back(0);
-			timer_ += to_string(time);
-			timer_.push_back(0);
-
-			COORD centerPos;
-			centerPos.X = position.X + (description.length() - timer_.length()) / 2;
-			centerPos.Y = position.Y + 1;
-			
-			drawText(centerPos.X, centerPos.Y, timer_, textColor, backgroundColor);
-			setColor(0,0);
-		}
-
-		bool finished;
+		bool isFinished;
 	private:
 		string timer_;
 };

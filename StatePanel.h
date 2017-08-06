@@ -21,49 +21,17 @@ class StatePanel : public Panel {
 			fillSquare(" ", 8, 2, position.X - 1, position.Y);
 		};
 
-		int show()
-		{  
-			int mode = 10;
-			bool choise = false;
-	
-			drawText(position.X, position.Y, description);
+		int const show();
 
-			redrawPanel(mode);
-	
-			return mode;
-		}
+		void redrawPanel(
+			int const count, 
+			int const textColor = White,
+			int const backgroundColor = Black);
 
-		void redrawPanel(int count, int textColor = 15, int backgroundColor = 0){
-			setColor(0,0);
-			counter_.clear();
-
-			counter_.push_back(0);
-			counter_ += to_string(count);
-			counter_.push_back(0);
-
-			COORD centerPos;
-			centerPos.X = position.X + (description.length() - counter_.length()) / 2;
-			centerPos.Y = position.Y + 1;
-
-			drawText(centerPos.X, centerPos.Y, counter_, textColor, backgroundColor);
-			setColor(0,0);
-		}
-
-		void redrawPanel(string count, int textColor = 15, int backgroundColor = 0){
-			setColor(0,0);
-			counter_.clear();
-
-			counter_.push_back(0);
-			counter_ += count;
-			counter_.push_back(0);
-
-			COORD centerPos;
-			centerPos.X = position.X + (description.length() - counter_.length()) / 2;
-			centerPos.Y = position.Y + 1;
-
-			drawText(centerPos.X, centerPos.Y, counter_, textColor, backgroundColor);
-			setColor(0,0);
-		}
+		void redrawPanel(
+			string const count,
+			int const textColor = White,
+			int const backgroundColor = Black);
 	private:
 		string counter_;
 };

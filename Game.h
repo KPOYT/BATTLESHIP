@@ -10,32 +10,25 @@ using namespace std;
 
 class Game {
 	public:
-		Game(){
-			status = userWay;
-			startTime_ = clock() / CLOCKS_PER_SEC;
-		};
-		~Game(){
-			delete timerPanel;
-			delete userField;
-			delete botField;
-		};
+		Game();
+		~Game();
 
 		void draw();
 		void start();
 
 		enum GameStatus
 		{
-			userWay = 0,
-			botWay = 1,
-			gameover  = 2
+			userTurn = 0,
+			botTurn	 = 1,
+			gameover = 2
 		};
 	private:
-		TimerPanel* timerPanel;
-		StatePanel* state;
-		StatePanel* userState;
-		StatePanel* botState;
-		Field* userField;
-		Field* botField;
+		TimerPanel* timerPanel_;
+		StatePanel* statePanel_;
+		StatePanel* userStatePanel_;
+		StatePanel* botStatePanel_;
+		Field* userField_;
+		Field* botField_;
 		int startTime_;
-		int status;
+		int status_;
 };

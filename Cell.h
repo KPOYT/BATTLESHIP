@@ -10,7 +10,13 @@ using namespace std;
 
 class Cell : public GraphycalElement {
 	public:
-		Cell(int x, int y, int textColor = 15, int backgroundColor = 0, int width = 2, int height = 2){
+		Cell(int x,
+			 int y,
+			 int textColor = 15,
+			 int backgroundColor = 0,
+			 int width = 2,
+			 int height = 2)
+		{
 			x_ = x;
 			y_ = y;
 			width_ = width;
@@ -19,13 +25,7 @@ class Cell : public GraphycalElement {
 			backgroundColor_ = backgroundColor;
 		};
 
-		void draw() {
-			setColor(textColor_, backgroundColor_);
-
-			fillSquare(" ", width_, height_, x_, y_);
-
-			setColor(15, 0);
-		}
+		void draw();
 	private:
 		int x_;
 		int y_;
