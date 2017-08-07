@@ -5,7 +5,7 @@ int const StatePanel::show()
 	int mode = 10;
 	bool choise = false;
 	
-	drawText(position.X, position.Y, description);
+	console->drawText(position.X, position.Y, description);
 
 	redrawPanel(mode);
 	
@@ -17,7 +17,7 @@ void StatePanel::redrawPanel(
 	 int const textColor, 
 	 int const backgroundColor)
 {
-	setColor(Black, Black);
+	console->setColor(console->Black, console->Black);
 	counter_.clear();
 
 	counter_.push_back(0);
@@ -28,8 +28,8 @@ void StatePanel::redrawPanel(
 	centerPos.X = position.X + (description.length() - counter_.length()) / 2;
 	centerPos.Y = position.Y + 1;
 
-	drawText(centerPos.X, centerPos.Y, counter_, textColor, backgroundColor);
-	setColor(Black, Black);
+	console->drawText(centerPos.X, centerPos.Y, counter_, textColor, backgroundColor);
+	console->setColor(console->Black, console->Black);
 }
 
 void StatePanel::redrawPanel(
@@ -37,7 +37,7 @@ void StatePanel::redrawPanel(
 	 int const textColor,
 	 int const backgroundColor)
 {
-	setColor(Black, Black);
+	console->setColor(console->Black, console->Black);
 	counter_.clear();
 
 	counter_.push_back(0);
@@ -48,6 +48,6 @@ void StatePanel::redrawPanel(
 	centerPos.X = position.X + (description.length() - counter_.length()) / 2;
 	centerPos.Y = position.Y + 1;
 
-	drawText(centerPos.X, centerPos.Y, counter_, textColor, backgroundColor);
-	setColor(Black, Black);
+	console->drawText(centerPos.X, centerPos.Y, counter_, textColor, backgroundColor);
+	console->setColor(console->Black, console->Black);
 }

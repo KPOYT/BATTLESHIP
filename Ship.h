@@ -1,28 +1,28 @@
 #include <iostream>
 #include <windows.h>
+#include <vector>
 
 using namespace std;
 
 class Ship {
 	public:
 		Ship(){
-			size = 0;
-			type = vertical;
-		};
-		Ship(int size_){
-			size = size_;
+			type_ = vertical;
 		};
 
 		void addCell(COORD const cell);
+		COORD const getCell(int const index);
 		bool const checkCell(COORD const cell);
-		
-		int size;
-		int type;
-		COORD cells[4];
+
+		int const size();
+		int const type();
 
 		enum ShipState
 		{
 			vertical = 0,
 			horizontal = 1
 		};
+	private:
+		int type_;
+		vector<COORD> cells;
 };

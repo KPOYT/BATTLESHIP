@@ -4,12 +4,12 @@ void ExitMenu::redrawMenu(int mode) {
 	switch(mode)
 	{
 		case 0:
-			drawText(35, 12, "Yes");
-			drawText(42, 12, "No", 2, 0);
+			console->drawText(35, 12, "Yes");
+			console->drawText(42, 12, "No", console->Green, console->Black);
 		break;
 		case 1:
-			drawText(35, 12, "Yes", 2, 0);
-			drawText(42, 12, "No");
+			console->drawText(35, 12, "Yes", console->Green, console->Black);
+			console->drawText(42, 12, "No");
 		break;
 	}
 }

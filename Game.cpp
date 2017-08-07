@@ -21,11 +21,15 @@ typedef struct
 
 void timerUpdate(void* pParams){
 	MsParams * ptr = (MsParams *)pParams;
+	Console* console = Console::Instance();
 	
 	do {
-		int time = clock() / CLOCKS_PER_SEC - ptr->start;
-		ptr->panel->redrawTimer(time);
-		Sleep(1000);
+		bool isBusy = console->status();
+		if(!isBusy){
+			int time = clock() / CLOCKS_PER_SEC - ptr->start;
+			ptr->panel->redrawTimer(time);
+			Sleep(1000);
+		}
 	}while(!ptr->panel->isFinished);
 }
 

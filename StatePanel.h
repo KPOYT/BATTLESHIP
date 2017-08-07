@@ -18,20 +18,20 @@ class StatePanel : public Panel {
 			string const desc = "Ships:"):Panel(x, y, desc) {};
 		
 		~StatePanel(){
-			fillSquare(" ", 8, 2, position.X - 1, position.Y);
+			console->fillSquare(" ", 8, 2, position.X - 1, position.Y);
 		};
 
 		int const show();
 
 		void redrawPanel(
 			int const count, 
-			int const textColor = White,
-			int const backgroundColor = Black);
+			int const textColor = 15,
+			int const backgroundColor = 0);
 
 		void redrawPanel(
 			string const count,
-			int const textColor = White,
-			int const backgroundColor = Black);
+			int const textColor = 15,
+			int const backgroundColor = 0);
 	private:
 		string counter_;
 };

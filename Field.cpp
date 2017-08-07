@@ -23,7 +23,7 @@ void Field::clearField(){
 }
 
 void Field::findPlaceToSheep(int const shipType, int const index){
-	Ship* ship = new Ship(shipType);
+	Ship* ship = new Ship();
 	bool find = false;
 	
 	srand(GetTickCount());
@@ -71,7 +71,7 @@ void Field::findPlaceToSheep(int const shipType, int const index){
 					pos.X = x+i;
 					pos.Y = y;
 					ship->addCell(pos);
-					ship->type = ship->horizontal;
+					//ship->type = ship->horizontal;
 					ships_[index] = ship;
 				}
 				else
@@ -81,7 +81,7 @@ void Field::findPlaceToSheep(int const shipType, int const index){
 					pos.X = x;
 					pos.Y = y+i;
 					ship->addCell(pos);
-					ship->type = ship->vertical;
+					//ship->type = ship->vertical;
 					ships_[index] = ship;
 				}
 			}
@@ -93,7 +93,7 @@ void Field::findPlaceToSheep(int const shipType, int const index){
 int const Field::walk() {
 	active_ = true;
 
-	drawCell(position_, Yellow, Yellow);
+	drawCell(position_, console->Yellow, console->Yellow);
 
 	bool isDone = false;
 	do
@@ -253,18 +253,18 @@ void Field::fillCellsAroundKilledShip() {
 
 	COORD coord;
 
-	for(int i = -1; i <= ship->size; i++)
+	for(int i = -1; i <= ship->size(); i++)
 	{
 		for(int j = -1; j <= 1; j++)
 		{
-			switch(ship->type){
+			switch(ship->type()){
 				case ship->vertical:
-					coord.X = ship->cells[0].X + j;
-					coord.Y = ship->cells[0].Y + i;
+					coord.X = ship->getCell(0).X + j;
+					coord.Y = ship->getCell(0).Y + i;
 					break;
 				case ship->horizontal:
-					coord.X = ship->cells[0].X + i;
-					coord.Y = ship->cells[0].Y + j;
+					coord.X = ship->getCell(0).X + i;
+					coord.Y = ship->getCell(0).Y + j;
 					break;
 			}
 
@@ -323,9 +323,9 @@ Ship* const Field::findShipByPosition(int x, int y){
 }
 
 bool const Field::checkPositionAroundShip(Ship* ship, COORD position) {
-	for(int i = 0; i < ship->size; i++)
+	for(int i = 0; i < ship->size(); i++)
 	{
-		if(ship->cells[i].X == position.X && ship->cells[i].Y == position.Y)
+		if(ship->getCell(i).X == position.X && ship->getCell(i).Y == position.Y)
 			return false;
 	}
 
@@ -333,8 +333,8 @@ bool const Field::checkPositionAroundShip(Ship* ship, COORD position) {
 }
 
 bool const Field::isKilledShip(Ship* ship) {
-	for(int j = 0; j < ship->size; j++){
-		COORD cell = ship->cells[j];
+	for(int j = 0; j < ship->size(); j++){
+		COORD cell = ship->getCell(j);
 		if(grid_[cell.X][cell.Y] != hit)
 			return false;
 	}
@@ -348,15 +348,17 @@ void Field::draw() {
 	drawShips();
 
 	if(active_)
-		drawCell(position_, Yellow, Yellow);
+		drawCell(position_, console->Yellow, console->Yellow);
 }
 
 void Field::drawField(){
-	setColor(White, Black);
+	Console* console = Console::Instance();
 
-	fillLine("\xc9", "\xcd", "\xBB", width_, x_, y_);
-	fillSquare("\xba", " ", "\xba", width_, height_-2, x_, y_+1);
-	fillLine("\xc8", "\xcd", "\xBC", width_, x_, y_ + height_ - 1);
+	console->setColor(console->White, console->Black);
+
+	console->fillLine("\xc9", "\xcd", "\xBB", width_, x_, y_);
+	console->fillSquare("\xba", " ", "\xba", width_, height_-2, x_, y_+1);
+	console->fillLine("\xc8", "\xcd", "\xBC", width_, x_, y_ + height_ - 1);
 }
 
 void Field::drawShips(){
@@ -373,15 +375,15 @@ void Field::drawShips(){
 			switch(grid_[i][j]){
 				case full:{
 					if(isOpenShips)
-						drawCell(coords, Cyan, Cyan);
+						drawCell(coords, console->Cyan, console->Cyan);
 					break;
 				}
 				case miss:{
-					drawCell(coords, Magenta, Magenta);
+					drawCell(coords, console->Magenta, console->Magenta);
 					break;
 				}
 				case hit:{
-					drawCell(coords, Red, Red);
+					drawCell(coords, console->Red, console->Red);
 					break;
 				}
 			}
@@ -398,7 +400,7 @@ int const Field::checkCell(int x, int y){
 }
 
 void Field::drawCell(COORD position, int textColor, int backgroundColor){
-	setColor(White, Black);
+	console->setColor(console->White, console->Black);
 
 	if(position.X < 0)
 		position.X = 0;
@@ -413,5 +415,5 @@ void Field::drawCell(COORD position, int textColor, int backgroundColor){
 	Cell cell(coords.X + position.X * 2, coords.Y + position.Y * 2, textColor, backgroundColor);
 	cell.draw();
 
-	setColor(White, Black);
+	console->setColor(console->White, console->Black);
 }

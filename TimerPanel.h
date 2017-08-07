@@ -27,7 +27,7 @@ class TimerPanel : public Panel {
 		};
 
 		~TimerPanel(){
-			fillLine(" ", timer_.length(), position.X, position.Y + 1, false);
+			console->fillLine(" ", timer_.length(), position.X, position.Y + 1, false);
 		};
 
 		int const show();

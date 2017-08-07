@@ -1,9 +1,11 @@
 #include "Cell.h"
 
 void Cell::draw() {
-	setColor(textColor_, backgroundColor_);
+	Console* console = Console::Instance();
 
-	fillSquare(" ", width_, height_, x_, y_);
+	console->setColor(textColor_, backgroundColor_);
 
-	setColor(15, 0);
+	console->fillSquare(" ", width_, height_, x_, y_);
+
+	console->setColor(console->White, console->Black);
 }

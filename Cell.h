@@ -1,14 +1,14 @@
 #include <iostream>
 #include <windows.h>
 
-#ifndef GRAPHYCALELEMENT_H
-#define GRAPHYCALELEMENT_H
-#include "GraphycalElement.h"
+#ifndef CONSOLE_H
+#define CONSOLE_H
+#include "Console.h"
 #endif
 
 using namespace std;
 
-class Cell : public GraphycalElement {
+class Cell {
 	public:
 		Cell(int x,
 			 int y,

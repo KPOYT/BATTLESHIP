@@ -4,12 +4,12 @@ void MainMenu::redrawMenu(int mode) {
 	switch(mode)
 	{
 		case 0:
-			drawText(35, 10, "New game", 2, 0);
-			drawText(37, 12, "Exit");
+			console->drawText(35, 10, "New game", console->Green, console->Black);
+			console->drawText(37, 12, "Exit");
 		break;
 		case 1:
-			drawText(35, 10, "New game");
-			drawText(37, 12, "Exit", 2, 0);
+			console->drawText(35, 10, "New game");
+			console->drawText(37, 12, "Exit", console->Green, console->Black);
 		break;
 	}
 }

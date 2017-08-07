@@ -26,8 +26,8 @@ int const Bot::checkCell(int const x, int const y){
 }
 
 bool const Bot::checkKilledShip(Ship* const ship) {
-	for(int j = 0; j < ship->size; j++){
-		COORD cell = ship->cells[j];
+	for(int j = 0; j < ship->size(); j++){
+		COORD cell = ship->getCell(j);
 		if(grid[cell.X][cell.Y] != hit)
 			return false;
 	}
@@ -72,8 +72,8 @@ COORD const Bot::findRandomPlace() {
 				coord.X = x;
 				coord.Y = y;
 
-				if(!checkKilledShip(ship) && ship->size > 1){
-					size_ = ship->size;
+				if(!checkKilledShip(ship) && ship->size() > 1){
+					size_ = ship->size();
 					cells_[0] = coord;
 					type_ = unknown;
 				} 

@@ -4,7 +4,7 @@ int const ExitPanel::show()
 {  
 	int mode = 0;
 	
-	drawText(position.X, position.Y, description);
+	console->drawText(position.X, position.Y, description);
 
 	redrawMenu(mode);
 
@@ -17,12 +17,12 @@ void ExitPanel::redrawMenu(int const mode) {
 	switch(mode)
 	{
 		case 0:
-			drawText(position.X + 15, position.Y, "Yes");
-			drawText(position.X + 20, position.Y, "No", 2, 0);
+			console->drawText(position.X + 15, position.Y, "Yes");
+			console->drawText(position.X + 20, position.Y, "No", console->Green, console->Black);
 		break;
 		case 1:
-			drawText(position.X + 15, position.Y, "Yes", 2, 0);
-			drawText(position.X + 20, position.Y, "No");
+			console->drawText(position.X + 15, position.Y, "Yes", console->Green, console->Black);
+			console->drawText(position.X + 20, position.Y, "No");
 		break;
 	}
 }

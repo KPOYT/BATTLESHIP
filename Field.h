@@ -8,14 +8,14 @@
 #include "Ship.h"
 #endif
 
-#ifndef GRAPHYCALELEMENT_H
-#define GRAPHYCALELEMENT_H
-#include "GraphycalElement.h"
+#ifndef CONSOLE_H
+#define CONSOLE_H
+#include "Console.h"
 #endif
 
 using namespace std;
 
-class Field : public GraphycalElement {
+class Field {
 	public:
 		Field()
 		{
@@ -26,6 +26,7 @@ class Field : public GraphycalElement {
 			active_ = false;
 			position_.X = 0;
 			position_.Y = 0;
+			console = Console::Instance();
 		};
 		Field(
 			 int const x,
@@ -40,6 +41,7 @@ class Field : public GraphycalElement {
 			active_ = false;
 			position_.X = 0;
 			position_.Y = 0;
+			console = Console::Instance();
 		};
 		~Field()
 		{
@@ -67,6 +69,8 @@ class Field : public GraphycalElement {
 			unsuccessful = 102,
 			gameover = 103
 		};
+	protected:
+		Console* console;
 	private:
 		static int const MAX_SIZE = 10;
 
@@ -74,8 +78,8 @@ class Field : public GraphycalElement {
 		void drawShips();
 		void drawCell(
 			COORD const position, 
-			int const textColor = White, 
-			int const backgroundColor = Black);
+			int const textColor = 15, 
+			int const backgroundColor = 0);
 		void clearField();
 		void updateBotGrid();
 		void updateBotShips();

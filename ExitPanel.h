@@ -18,7 +18,7 @@ class ExitPanel : public Panel {
 			string const desc = "Are you sure?"):Panel(x, y, desc) {};
 		
 		~ExitPanel(){
-			fillLine(" ", description.length() + 9, position.X, position.Y, false);
+			console->fillLine(" ", description.length() + 9, position.X, position.Y, false);
 		};
 
 		int const show();
