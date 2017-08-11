@@ -9,39 +9,19 @@ using namespace std;
 
 class Menu {
 	public:
-		Menu( 
-			string const desc = "Are you sure?")
-		{
-			position.X = 0;
-			position.Y = 0;
-			description = desc;
-			console = Console::Instance();
-		};
+		Menu(const string desc = "Are you sure?");
 
-		Menu(
-			 COORD const pos, 
-			 string const desc = "Are you sure?")
-		{
-			position = pos;
-			description = desc;
-			console = Console::Instance();
-		};
+		Menu(const COORD pos, 
+			 const string desc = "Are you sure?");
 
-		Menu(
-			 int const x,
-			 int const y,
-			 string const desc = "Are you sure?")
-		{
-			position.X = x;
-			position.Y = y;
-			description = desc;
-			console = Console::Instance();
-		};
+		Menu(const int x,
+			 const int y,
+			 const string desc = "Are you sure?");
 
-		virtual int const show();
+		virtual const int show();
 	protected:
 		virtual void redrawMenu(int){};
-		virtual int const checkKeys(int mode){ return mode; };
+		virtual const int checkKeys(int mode){ return mode; };
 
 		Console* console;
 

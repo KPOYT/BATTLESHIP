@@ -1,4 +1,7 @@
+#ifndef MAINMENU_H
+#define MAINMENU_H
 #include "MainMenu.h"
+#endif
 
 void MainMenu::redrawMenu(int mode) {
 	switch(mode)

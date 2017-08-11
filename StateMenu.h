@@ -14,9 +14,9 @@ class StateMenu {
 		};
 
 		void draw(
-			int const playerShips,
-			int const botShips,
-			int const time);
+			const int playerShips,
+			const int botShips,
+			const int time);
 	protected:
 		Console* console;
 };

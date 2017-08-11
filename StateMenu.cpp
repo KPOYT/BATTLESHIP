@@ -1,9 +1,12 @@
+#ifndef STATEMENU_H
+#define STATEMENU_H
 #include "StateMenu.h"
+#endif
 
 void StateMenu::draw(
-	 int const playerShips,
-	 int const botShips,
-	 int const time)
+	 const int playerShips,
+	 const int botShips,
+	 const int time)
 {
 	console->setColor(console->Black, console->Black);
 	system("cls");
