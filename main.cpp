@@ -1,19 +1,31 @@
 #include <windows.h>
+
+#ifndef MAINMENU_H
+#define MAINMENU_H
 #include "MainMenu.h"
+#endif
+
+#ifndef EXITMENU_H
+#define EXITMENU_H
 #include "ExitMenu.h"
+#endif
+
+#ifndef GAME_H
+#define GAME_H
 #include "Game.h"
+#endif
 
 HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 
-BOOL const ShowConsoleCursor(BOOL const bShow);
-int const StartGame();
+const BOOL ShowConsoleCursor(const BOOL bShow);
+const int StartGame();
 
 void main() {
 	ShowConsoleCursor(FALSE);
 	StartGame();
 }
 
-BOOL const ShowConsoleCursor(BOOL const bShow)
+const BOOL ShowConsoleCursor(const BOOL bShow)
 {
     CONSOLE_CURSOR_INFO cci;
 
@@ -31,7 +43,7 @@ BOOL const ShowConsoleCursor(BOOL const bShow)
     return TRUE;
 }
 
-int const StartGame()
+const int StartGame()
 {
 	MainMenu* mainMenu = new MainMenu;
 	ExitMenu* exitMenu = new ExitMenu(33, 10);
