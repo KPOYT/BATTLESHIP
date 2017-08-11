@@ -6,32 +6,32 @@
 class StatePanel : public Panel {
 	public:
 		StatePanel(
-			string const desc = "Ships:"):Panel(desc) {};
+			const string desc = "Ships:"):Panel(desc) {};
 		
 		StatePanel(
-			COORD const pos, 
-			string const desc = "Ships:"):Panel(pos, desc){};
+			const COORD pos, 
+			const string desc = "Ships:"):Panel(pos, desc){};
 		
 		StatePanel(
-			int const x, 
-			int const y, 
-			string const desc = "Ships:"):Panel(x, y, desc) {};
+			const int x, 
+			const int y, 
+			const string desc = "Ships:"):Panel(x, y, desc) {};
 		
 		~StatePanel(){
 			console->fillSquare(" ", 8, 2, position.X - 1, position.Y);
 		};
 
-		int const show();
+		const int show();
 
 		void redrawPanel(
-			int const count, 
-			int const textColor = 15,
-			int const backgroundColor = 0);
+			const int count, 
+			const int textColor = 15,
+			const int backgroundColor = 0);
 
 		void redrawPanel(
-			string const count,
-			int const textColor = 15,
-			int const backgroundColor = 0);
+			const string count,
+			const int textColor = 15,
+			const int backgroundColor = 0);
 	private:
 		string counter_;
 };

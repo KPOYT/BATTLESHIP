@@ -5,34 +5,24 @@
 
 class TimerPanel : public Panel {
 	public:
-		TimerPanel(
-			string const desc = "Game time:"):Panel(desc)
-		{
-			isFinished = false;
-		};
+		TimerPanel(const string desc = "Game time:");
 
 		TimerPanel(
-			COORD const pos, 
-			string const desc = "Game time:"):Panel(pos, desc)
-		{
-			isFinished = false;
-		};
+			const COORD pos, 
+			const string desc = "Game time:");
 
 		TimerPanel(
-			int const x, 
-			int const y, 
-			string const desc = "Game time:"):Panel(x, y, desc)
-		{
-			isFinished = false;
-		};
+			const int x, 
+			const int y, 
+			const string desc = "Game time:");
 
-		~TimerPanel(){
-			console->fillLine(" ", timer_.length(), position.X, position.Y + 1, false);
-		};
+		~TimerPanel();
 
-		int const show();
+		const int show();
 
-		void redrawTimer(int const time, int const textColor = 15, int const backgroundColor = 0);
+		void redrawTimer(const int time, 
+						const int textColor = 15, 
+						const int backgroundColor = 0);
 
 		bool isFinished;
 	private:

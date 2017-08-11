@@ -1,6 +1,33 @@
+#ifndef TIMERPANEL_H
+#define TIMERPANEL_H
 #include "TimerPanel.h"
+#endif
 
-int const TimerPanel::show()
+TimerPanel::TimerPanel(const string desc):Panel(desc)
+{
+	isFinished = false;
+};
+
+TimerPanel::TimerPanel(const COORD pos, 
+					const string desc):Panel(pos, desc)
+{
+	isFinished = false;
+};
+
+TimerPanel::TimerPanel(
+	const int x, 
+	const int y, 
+	const string desc):Panel(x, y, desc)
+{
+	isFinished = false;
+};
+
+TimerPanel::~TimerPanel()
+{
+	console->fillLine(" ", timer_.length(), position.X, position.Y + 1, false);
+};
+
+const int TimerPanel::show()
 {  
 	int mode = 0;
 	bool choise = false;
@@ -13,9 +40,9 @@ int const TimerPanel::show()
 }
 
 void TimerPanel::redrawTimer(
-	 int const time, 
-	 int const textColor,
-	 int const backgroundColor)
+	 const int time, 
+	 const int textColor,
+	 const int backgroundColor)
 {
 	console->setColor(console->Black, console->Black);
 	timer_.clear();

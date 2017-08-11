@@ -1,4 +1,7 @@
+#ifndef STATEPANEL_H
+#define STATEPANEL_H
 #include "StatePanel.h"
+#endif
 
 int const StatePanel::show()
 {  
@@ -13,9 +16,9 @@ int const StatePanel::show()
 }
 
 void StatePanel::redrawPanel(
-	 int const count, 
-	 int const textColor, 
-	 int const backgroundColor)
+	 const int count, 
+	 const int textColor, 
+	 const int backgroundColor)
 {
 	console->setColor(console->Black, console->Black);
 	counter_.clear();
@@ -33,9 +36,9 @@ void StatePanel::redrawPanel(
 }
 
 void StatePanel::redrawPanel(
-	 string const count,
-	 int const textColor,
-	 int const backgroundColor)
+	 const string count,
+	 const int textColor,
+	 const int backgroundColor)
 {
 	console->setColor(console->Black, console->Black);
 	counter_.clear();

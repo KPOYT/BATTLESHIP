@@ -1,6 +1,9 @@
+#ifndef EXITPANEL_H
+#define EXITPANEL_H
 #include "ExitPanel.h"
+#endif
 
-int const ExitPanel::show()
+const int ExitPanel::show()
 {  
 	int mode = 0;
 	
@@ -13,7 +16,7 @@ int const ExitPanel::show()
 	return mode;
 }
 
-void ExitPanel::redrawMenu(int const mode) {
+void ExitPanel::redrawMenu(const int mode) {
 	switch(mode)
 	{
 		case 0:
@@ -27,7 +30,7 @@ void ExitPanel::redrawMenu(int const mode) {
 	}
 }
 
-int const ExitPanel::checkKeys(int mode){
+const int ExitPanel::checkKeys(int mode){
 	bool isDone = false;
 	do 
 	{

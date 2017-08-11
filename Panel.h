@@ -9,27 +9,11 @@ using namespace std;
 
 class Panel {
 	public:
-		Panel(string const desc = "Are you sure?") {
-			position.X = 0; 
-			position.Y = 0;
-			description = desc;
-			console = Console::Instance();
-		};
+		Panel(const string desc = "Are you sure?");
 
-		Panel(COORD const pos, string const desc){
-			position = pos;
-			description = desc;
-			console = Console::Instance();
-		};
+		Panel(const COORD pos, const string desc);
 		
-		Panel(int const x, int const y, string const desc){
-			position.X = x;
-			position.Y = y;
-			description = desc;
-			console = Console::Instance();
-		};
-		
-		~Panel(){};
+		Panel(const int x, const int y, const string desc);
 
 		virtual const int show(){ return -1; };
 
