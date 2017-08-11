@@ -5,16 +5,16 @@
 
 class Bot {
 	public:
-		COORD const findCellToStrike();
+		const COORD findCellToStrike();
 
 		int grid[10][10];
 		Ship* ships[10];
 	private:
 		void clearCells();
-		int const checkCell(int const x, int const y);
-		bool const checkKilledShip(Ship* const ship);
-		COORD const findRandomPlace();
-		Ship* const findShipByPosition(int const x, int const y);
+		const int checkCell(const int x, const int y);
+		const bool checkKilledShip(Ship* const ship);
+		const COORD findRandomPlace();
+		Ship* const findShipByPosition(const int x, const int y);
 
 		COORD cells_[4];
 
@@ -23,16 +23,16 @@ class Bot {
 
 		enum ShipLocation
 		{
-			vertical = 0,
-			horizontal = 1,
-			unknown = -1
+			Vertical = 0,
+			Horizontal = 1,
+			Unknown = -1
 		};
 
-		enum CellStatus
+		enum CellState
 		{
-			empty = 0,
-			full = 1,
-			hit = 2,
-			miss = 3
+			Empty = 0,
+			Full = 1,
+			Hit = 2,
+			Miss = 3
 		};
 };

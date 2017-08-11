@@ -10,20 +10,12 @@ using namespace std;
 
 class Cell {
 	public:
-		Cell(int x,
-			 int y,
-			 int textColor = 15,
-			 int backgroundColor = 0,
-			 int width = 2,
-			 int height = 2)
-		{
-			x_ = x;
-			y_ = y;
-			width_ = width;
-			height_ = height;
-			textColor_ = textColor;
-			backgroundColor_ = backgroundColor;
-		};
+		Cell(const int x,
+			 const int y,
+			 const int textColor = 15,
+			 const int backgroundColor = 0,
+			 const int width = 2,
+			 const int height = 2);
 
 		void draw();
 	private:

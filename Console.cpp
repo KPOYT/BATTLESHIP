@@ -1,7 +1,10 @@
+#ifndef CONSOLE_H
+#define CONSOLE_H
 #include "Console.h"
+#endif
 
 Console* Console::_instance = 0;
-bool Console::_status = free;
+bool Console::_status = Free;
 
 Console* Console::Instance(){
 	if (_instance == 0) {
@@ -10,37 +13,37 @@ Console* Console::Instance(){
 	return _instance;
 }
 
-bool const Console::status(){
+const bool Console::status(){
 	return _status;
 }
 
 void Console::drawText(
-	 int const x,
-	 int const y,
-	 string const str,
-	 int const textColor,
-	 int const backgroundColor)
+	 const int x,
+	 const int y,
+	 const string str,
+	 const int textColor,
+	 const int backgroundColor)
 {
-	_status = busy;
+	_status = Busy;
 
 	setColor(textColor,backgroundColor);
 	gotoXY(x,y);
 	cout<<str;
 
-	_status = free;
+	_status = Free;
 }
 
 void Console::setColor(
-	 int const textColor, 
-	 int const backgroundColor)
+	 const int textColor, 
+	 const int backgroundColor)
 {
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hStdOut, static_cast<WORD>((backgroundColor << 4) | textColor));
 }
 
 void Console::gotoXY(
-	 int const x,
-	 int const y)
+	 const int x,
+	 const int y)
 {
 	COORD coord = { x, y };
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -48,15 +51,15 @@ void Console::gotoXY(
 }
 
 void Console::fillLine(
-	 string const mid,
+	 const string mid,
 	 int width,
-	 int const x,
-	 int const y,
-	 bool const hasNewline,
-	 bool const checkStatus)
+	 const int x,
+	 const int y,
+	 const bool hasNewline,
+	 const bool checkStatus)
 {
 	if(checkStatus)
-		_status = busy;
+		_status = Busy;
 
 	if(width < 1) width = 1;
 			
@@ -70,21 +73,21 @@ void Console::fillLine(
 		cout<<"\n";
 	
 	if(checkStatus)
-		_status = free;
+		_status = Free;
 }
 
 void Console::fillLine(
-	 string const begin,
-	 string const mid,
-	 string const end,
+	 const string begin,
+	 const string mid,
+	 const string end,
 	 int width,
-	 int const x,
-	 int const y,
-	 bool const hasNewline,
-	 bool const checkStatus)
+	 const int x,
+	 const int y,
+	 const bool hasNewline,
+	 const bool checkStatus)
 {
 	if(checkStatus)
-		_status = busy;
+		_status = Busy;
 
 	if(width < 3) width = 3;
 			
@@ -102,19 +105,19 @@ void Console::fillLine(
 		cout<<"\n";
 	
 	if(checkStatus)
-		_status = free;
+		_status = Free;
 }
 
 void Console::fillSquare(
-	 string const mid,
+	 const string mid,
 	 int width,
 	 int height,
-	 int const x,
-	 int const y,
-	 bool const checkStatus)
+	 const int x,
+	 const int y,
+	 const bool checkStatus)
 {
 	if(checkStatus)
-		_status = busy;
+		_status = Busy;
 
 	if(width < 1) width = 1;
 	if(height < 1) height = 1;
@@ -123,21 +126,21 @@ void Console::fillSquare(
 		fillLine(mid, width, x, y + i, true, false);
 	
 	if(checkStatus)
-		_status = free;
+		_status = Free;
 }
 
 void Console::fillSquare(
-	 string const begin,
-	 string const mid,
-	 string const end,
+	 const string begin,
+	 const string mid,
+	 const string end,
 	 int width,
 	 int height,
-	 int const x,
-	 int const y,
-	 bool const checkStatus)
+	 const int x,
+	 const int y,
+	 const bool checkStatus)
 {
 	if(checkStatus)
-		_status = busy;
+		_status = Busy;
 
 	if(width < 3) width = 3;
 	if(height < 1) height = 1;
@@ -146,5 +149,5 @@ void Console::fillSquare(
 		fillLine(begin, mid, end, width, x, y + i, true, false);
 	
 	if(checkStatus)
-		_status = free;
+		_status = Free;
 }

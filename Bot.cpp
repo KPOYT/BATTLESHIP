@@ -1,6 +1,9 @@
+#ifndef BOT_H
+#define BOT_H
 #include "Bot.h"
+#endif
 
-COORD const Bot::findCellToStrike(){
+const COORD Bot::findCellToStrike(){
 	COORD coord;
 
 	srand(GetTickCount());
@@ -21,21 +24,21 @@ void Bot::clearCells(){
 	}
 };
 
-int const Bot::checkCell(int const x, int const y){
+const int Bot::checkCell(const int x, const int y){
 	return grid[x][y];
 }
 
-bool const Bot::checkKilledShip(Ship* const ship) {
+const bool Bot::checkKilledShip(Ship* const ship) {
 	for(int j = 0; j < ship->size(); j++){
 		COORD cell = ship->getCell(j);
-		if(grid[cell.X][cell.Y] != hit)
+		if(grid[cell.X][cell.Y] != Hit)
 			return false;
 	}
 			
 	return true;
 }
 
-Ship* const Bot::findShipByPosition(int const x, int const y){
+Ship* const Bot::findShipByPosition(const int x, const int y){
 	COORD coord;
 	coord.X = x;
 	coord.Y = y;
@@ -48,7 +51,7 @@ Ship* const Bot::findShipByPosition(int const x, int const y){
 	return NULL;
 }
 
-COORD const Bot::findRandomPlace() {
+const COORD Bot::findRandomPlace() {
 	COORD coord;
 
 	srand(GetTickCount());
@@ -61,12 +64,12 @@ COORD const Bot::findRandomPlace() {
 		
 		int c = checkCell(x, y);
 		switch(c){
-			case empty:
+			case Empty:
 				coord.X = x;
 				coord.Y = y;
 				isDone = true;
 			break;
-			case full:
+			case Full:
 				Ship* ship = findShipByPosition(x, y);
 
 				coord.X = x;
@@ -75,7 +78,7 @@ COORD const Bot::findRandomPlace() {
 				if(!checkKilledShip(ship) && ship->size() > 1){
 					size_ = ship->size();
 					cells_[0] = coord;
-					type_ = unknown;
+					type_ = Unknown;
 				} 
 				else
 					clearCells();

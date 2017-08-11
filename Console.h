@@ -9,57 +9,57 @@ class Console {
 		static Console* Instance();
 
 		void drawText(
-			int const x, 
-			int const y, 
-			string const str, 
-			int const textColor = White,
-			int const backgroundColor = Black);
+			const int x, 
+			const int y, 
+			const string str, 
+			const int textColor = White,
+			const int backgroundColor = Black);
 
 		void setColor(
-			int const textColor, 
-			int const backgroundColor);
+			const int textColor, 
+			const int backgroundColor);
 
 		void gotoXY(
-			int const x,
-			int const y);
+			const int x,
+			const int y);
 
 		void fillLine(
-			string const mid,
+			const string mid,
 			int width = 1,
-			int const x = 0,
-			int const y = 0,
-			bool const hasNewLine = true,
-			bool const checkStatus = true);
+			const int x = 0,
+			const int y = 0,
+			const bool hasNewLine = true,
+			const bool checkStatus = true);
 
 		void fillLine(
-			string const begin,
-			string const mid,
-			string const end,
+			const string begin,
+			const string mid,
+			const string end,
 			int width = 3,
-			int const x = 0,
-			int const y = 0,
-			bool const hasNewline = true,
-			bool const checkStatus = true);
+			const int x = 0,
+			const int y = 0,
+			const bool hasNewline = true,
+			const bool checkStatus = true);
 
 		void fillSquare(
-			string const mid,
+			const string mid,
 			int width = 1,
 			int height = 1,
-			int const x = 0,
-			int const y = 0,
-			bool const checkStatus = true);
+			const int x = 0,
+			const int y = 0,
+			const bool checkStatus = true);
 
 		void fillSquare(
-			string const begin,
-			string const mid,
-			string const end,
+			const string begin,
+			const string mid,
+			const string end,
 			int width = 3,
 			int height = 1,
-			int const x = 0,
-			int const y = 0,
-			bool const checkStatus = true);
+			const int x = 0,
+			const int y = 0,
+			const bool checkStatus = true);
 
-		bool const status();
+		const bool status();
 
 		enum ConsoleColor
 		{
@@ -83,8 +83,8 @@ class Console {
 
 		enum StatusType
 		{
-			free		= false,
-			busy		= true
+			Free		= false,
+			Busy		= true
 		};
 
 	protected:
