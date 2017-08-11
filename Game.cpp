@@ -1,9 +1,13 @@
 #include <conio.h>
 #include <process.h>
+
+#ifndef GAME_H
+#define GAME_H
 #include "Game.h"
+#endif
 
 Game::Game(){
-	status_ = userTurn;
+	status_ = UserTurn;
 	startTime_ = clock() / CLOCKS_PER_SEC;
 };
 
@@ -70,16 +74,16 @@ void Game::start() {
 	do
 	{
 		int success;
-		if(status_ == userTurn)
+		if(status_ == UserTurn)
 		{
 			statePanel_->redrawPanel("Your", 2);
 
 			success = botField_->walk();
 
-			if(success == botField_->unsuccessful)
-				status_ = botTurn;
-			else if(success == botField_->gameover)
-				status_ = gameover;
+			if(success == botField_->Unsuccessful)
+				status_ = BotTurn;
+			else if(success == botField_->Gameover)
+				status_ = Gameover;
 			else {
 				botStatePanel_->redrawPanel(botField_->leftShips());
 				
@@ -92,20 +96,20 @@ void Game::start() {
 					botField_->draw();
 					_getch();
 
-					status_ = gameover;
+					status_ = Gameover;
 				}
 			}
 		}
-		else if(status_ == botTurn)
+		else if(status_ == BotTurn)
 		{
 			statePanel_->redrawPanel("Bot", 4);
 
 			success = userField_->walkByBot();
 			
-			if(success == userField_->unsuccessful)
-				status_ = userTurn;
-			else if(success == userField_->gameover)
-				status_ = gameover;
+			if(success == userField_->Unsuccessful)
+				status_ = UserTurn;
+			else if(success == userField_->Gameover)
+				status_ = Gameover;
 			else {
 				userStatePanel_->redrawPanel(userField_->leftShips());
 
@@ -118,12 +122,12 @@ void Game::start() {
 					botField_->draw();
 					_getch();
 					
-					status_ = gameover;
+					status_ = Gameover;
 				}
 			}
 		}
 	}
-	while (status_ != gameover);
+	while (status_ != Gameover);
 	timerPanel_->isFinished = true;
-	status_ = userTurn;
+	status_ = UserTurn;
 }

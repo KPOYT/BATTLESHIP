@@ -1,31 +1,38 @@
+#ifndef SHIP_H
+#define SHIP_H
 #include "Ship.h"
+#endif
 
-int const Ship::size() {
+Ship::Ship() {
+	type_ = Vertical;
+};
+
+const int Ship::size() {
 	return cells.size();
 };
 
-int const Ship::type() {
+const int Ship::type() {
 	return type_;
 };
 
-void Ship::addCell(COORD const cell) {
+void Ship::addCell(const COORD cell) {
 	cells.push_back(cell);
 
 	if(cells.size() > 0){
 		if(cells[0].X == cell.X)
-			type_ = vertical;
+			type_ = Vertical;
 		else
-			type_ = horizontal;
+			type_ = Horizontal;
 	}
 };
 
-COORD const Ship::getCell(int const index) {
+const COORD Ship::getCell(const int index) {
 	if(index >= size()) return COORD();
 
 	return cells[index];
 }
 
-bool const Ship::checkCell(COORD const cell) {
+const bool Ship::checkCell(const COORD cell) {
 
 	for(int i = 0; i < size(); i++) {
 		if(cells[i].X == cell.X && cells[i].Y == cell.Y){

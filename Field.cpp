@@ -1,8 +1,54 @@
 #include <conio.h>
 #include <time.h>
+
+#ifndef EXITPANEL_H
+#define EXITPANEL_H
 #include "ExitPanel.h"
+#endif
+
+#ifndef FIELD_H
+#define FIELD_H
 #include "Field.h"
+#endif
+
+#ifndef CELL_H
+#define CELL_H
 #include "Cell.h"
+#endif
+
+Field::Field()
+{
+	x_ = 0;
+	y_ = 0;
+	width_ = 22;
+	height_ = 22;
+	active_ = false;
+	position_.X = 0;
+	position_.Y = 0;
+	console = Console::Instance();
+};
+
+Field::Field(const int x,
+	const int y,
+	const int width,
+	const int height)
+{
+	x_ = x;
+	y_ = y;
+	width_ = width;
+	height_ = height;
+	active_ = false;
+	position_.X = 0;
+	position_.Y = 0;
+	console = Console::Instance();
+};
+
+Field::~Field()
+{
+	int size = sizeof(ships_) / sizeof(Ship);
+	for(int i = 0; i < size; i++)
+		delete ships_[i];
+};
 
 void Field::generate() {
 	int sheeps[] = {4,3,3,2,2,2,1,1,1,1};
@@ -22,7 +68,7 @@ void Field::clearField(){
 	}
 }
 
-void Field::findPlaceToSheep(int const shipType, int const index){
+void Field::findPlaceToSheep(const int shipType, const int index){
 	Ship* ship = new Ship();
 	bool find = false;
 	
@@ -45,7 +91,7 @@ void Field::findPlaceToSheep(int const shipType, int const index){
 						break;
 					}
 
-					if(grid_[x+i][y+j] != empty)
+					if(grid_[x+i][y+j] != Empty)
 						clear = false;
 				}
 				else
@@ -55,7 +101,7 @@ void Field::findPlaceToSheep(int const shipType, int const index){
 						break;
 					}
 
-					if(grid_[x+j][y+i] != empty)
+					if(grid_[x+j][y+i] != Empty)
 						clear = false;
 				}
 			}
@@ -66,22 +112,20 @@ void Field::findPlaceToSheep(int const shipType, int const index){
 			for(int i = 0; i < shipType; i++){
 				if(rotate < 5)
 				{
-					grid_[x+i][y] = full;
+					grid_[x+i][y] = Full;
 					COORD pos;
 					pos.X = x+i;
 					pos.Y = y;
 					ship->addCell(pos);
-					//ship->type = ship->horizontal;
 					ships_[index] = ship;
 				}
 				else
 				{
-					grid_[x][y+i] = full;
+					grid_[x][y+i] = Full;
 					COORD pos;
 					pos.X = x;
 					pos.Y = y+i;
 					ship->addCell(pos);
-					//ship->type = ship->vertical;
 					ships_[index] = ship;
 				}
 			}
@@ -90,7 +134,7 @@ void Field::findPlaceToSheep(int const shipType, int const index){
 	} while (!find);
 }
 
-int const Field::walk() {
+const int Field::walk() {
 	active_ = true;
 
 	drawCell(position_, console->Yellow, console->Yellow);
@@ -154,7 +198,7 @@ int const Field::walk() {
 					break;
 				}
 			}
-			drawCell(position_, 14, 14);
+			drawCell(position_, console->Yellow, console->Yellow);
 			drawCell(oldPosition_);
 			drawShips();
 		}
@@ -164,24 +208,24 @@ int const Field::walk() {
 			{
 				case VK_RETURN:
 					switch(grid_[position_.X][position_.Y]){
-						case empty: {
-							grid_[position_.X][position_.Y] = miss;
+						case Empty: {
+							grid_[position_.X][position_.Y] = Miss;
 							active_ = false;
 							isDone = true;
 							drawCell(position_);
 							drawShips();
 
-							return unsuccessful;
+							return Unsuccessful;
 						}
-						case full: {
-							grid_[position_.X][position_.Y] = hit;
+						case Full: {
+							grid_[position_.X][position_.Y] = Hit;
 							active_ = false;
 							isDone = true;
 							fillCellsAroundKilledShip();
 							drawCell(position_);
 							drawShips();
 
-							return successful;
+							return Successful;
 						}
 					}
 				break;
@@ -193,7 +237,7 @@ int const Field::walk() {
 					ExitPanel exitPanel(exitCoord);
 					int result = exitPanel.show();
 					if(result == 1)
-						return gameover;
+						return Gameover;
 				break;
 			}	
 		}
@@ -203,7 +247,7 @@ int const Field::walk() {
 	return false;
 }
 
-int const Field::walkByBot() {
+const int Field::walkByBot() {
 	updateBotGrid();
 	updateBotShips();
 
@@ -211,24 +255,24 @@ int const Field::walkByBot() {
 	position_ = coord;
 
 	switch(grid_[coord.X][coord.Y]){
-		case empty: {
-			grid_[coord.X][coord.Y] = miss;
+		case Empty: {
+			grid_[coord.X][coord.Y] = Miss;
 			drawCell(coord);
 			drawShips();
 
-			return unsuccessful;
+			return Unsuccessful;
 		}
-		case full: {
-			grid_[coord.X][coord.Y] = hit;
+		case Full: {
+			grid_[coord.X][coord.Y] = Hit;
 			fillCellsAroundKilledShip();
 			drawCell(position_);
 			drawShips();
 
-			return successful;
+			return Successful;
 		}
 	}
 
-	return unsuccessful;
+	return Unsuccessful;
 }
 
 void Field::updateBotGrid() {
@@ -258,11 +302,11 @@ void Field::fillCellsAroundKilledShip() {
 		for(int j = -1; j <= 1; j++)
 		{
 			switch(ship->type()){
-				case ship->vertical:
+				case ship->Vertical:
 					coord.X = ship->getCell(0).X + j;
 					coord.Y = ship->getCell(0).Y + i;
 					break;
-				case ship->horizontal:
+				case ship->Horizontal:
 					coord.X = ship->getCell(0).X + i;
 					coord.Y = ship->getCell(0).Y + j;
 					break;
@@ -275,12 +319,12 @@ void Field::fillCellsAroundKilledShip() {
 				continue;
 
 			if(checkPositionAroundShip(ship, coord))
-				grid_[coord.X][coord.Y] = miss;
+				grid_[coord.X][coord.Y] = Miss;
 		}
 	}
 }
 
-int const Field::leftShips(){
+const int Field::leftShips(){
 	int max = MAX_SIZE;
 
 	for(int s = 0; s < MAX_SIZE; s++){
@@ -300,7 +344,7 @@ Ship* const Field::getCurrentShip(){
 	return NULL;
 }
 
-Ship* const Field::findShipByPosition(COORD coord){
+Ship* const Field::findShipByPosition(const COORD coord){
 	for(int s = 0; s < MAX_SIZE; s++){
 		if(ships_[s]->checkCell(coord))
 			return ships_[s];
@@ -309,7 +353,7 @@ Ship* const Field::findShipByPosition(COORD coord){
 	return NULL;
 }
 
-Ship* const Field::findShipByPosition(int x, int y){
+Ship* const Field::findShipByPosition(const int x, const int y){
 	COORD coord;
 	coord.X = x;
 	coord.Y = y;
@@ -322,7 +366,7 @@ Ship* const Field::findShipByPosition(int x, int y){
 	return NULL;
 }
 
-bool const Field::checkPositionAroundShip(Ship* ship, COORD position) {
+const bool Field::checkPositionAroundShip(Ship* const ship, const COORD position) {
 	for(int i = 0; i < ship->size(); i++)
 	{
 		if(ship->getCell(i).X == position.X && ship->getCell(i).Y == position.Y)
@@ -332,10 +376,10 @@ bool const Field::checkPositionAroundShip(Ship* ship, COORD position) {
 	return true;
 }
 
-bool const Field::isKilledShip(Ship* ship) {
+bool const Field::isKilledShip(Ship* const ship) {
 	for(int j = 0; j < ship->size(); j++){
 		COORD cell = ship->getCell(j);
-		if(grid_[cell.X][cell.Y] != hit)
+		if(grid_[cell.X][cell.Y] != Hit)
 			return false;
 	}
 
@@ -352,8 +396,6 @@ void Field::draw() {
 }
 
 void Field::drawField(){
-	Console* console = Console::Instance();
-
 	console->setColor(console->White, console->Black);
 
 	console->fillLine("\xc9", "\xcd", "\xBB", width_, x_, y_);
@@ -373,16 +415,16 @@ void Field::drawShips(){
 			coords.Y = j;
 
 			switch(grid_[i][j]){
-				case full:{
+				case Full:{
 					if(isOpenShips)
 						drawCell(coords, console->Cyan, console->Cyan);
 					break;
 				}
-				case miss:{
+				case Miss:{
 					drawCell(coords, console->Magenta, console->Magenta);
 					break;
 				}
-				case hit:{
+				case Hit:{
 					drawCell(coords, console->Red, console->Red);
 					break;
 				}
@@ -391,15 +433,15 @@ void Field::drawShips(){
 	}
 }
 
-int const Field::checkCell(COORD position){
+int const Field::checkCell(const COORD position){
 	return grid_[position.X][position.Y];
 }
 
-int const Field::checkCell(int x, int y){
+int const Field::checkCell(const int x, const int y){
 	return grid_[x][y];
 }
 
-void Field::drawCell(COORD position, int textColor, int backgroundColor){
+void Field::drawCell(COORD position, const int textColor, const int backgroundColor){
 	console->setColor(console->White, console->Black);
 
 	if(position.X < 0)

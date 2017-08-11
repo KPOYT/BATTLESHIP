@@ -1,7 +1,11 @@
 #include <iostream>
 #include <windows.h>
 #include <array>
+
+#ifndef BOT_H
+#define BOT_H
 #include "Bot.h"
+#endif
 
 #ifndef SHIP_H
 #define SHIP_H
@@ -17,57 +21,31 @@ using namespace std;
 
 class Field {
 	public:
-		Field()
-		{
-			x_ = 0;
-			y_ = 0;
-			width_ = 22;
-			height_ = 22;
-			active_ = false;
-			position_.X = 0;
-			position_.Y = 0;
-			console = Console::Instance();
-		};
-		Field(
-			 int const x,
-			 int const y,
-			 int const width = 22,
-			 int const height = 22)
-		{
-			x_ = x;
-			y_ = y;
-			width_ = width;
-			height_ = height;
-			active_ = false;
-			position_.X = 0;
-			position_.Y = 0;
-			console = Console::Instance();
-		};
-		~Field()
-		{
-			int size = sizeof(ships_) / sizeof(Ship);
-			for(int i = 0; i < size; i++)
-				delete ships_[i];
-		};
+		Field();
+		Field(const int x,
+			 const int y,
+			 const int width = 22,
+			 const int height = 22);
+		~Field();
 		
 		void draw();
 		void generate();
-		int const walk();
-		int const walkByBot();
-		int const leftShips();
-		int const checkCell(COORD const);
-		int const checkCell(int const, int const);
-		bool const isKilledShip(Ship* const);
+		const int walk();
+		const int walkByBot();
+		const int leftShips();
+		const int checkCell(COORD const);
+		const int checkCell(int const, int const);
+		const bool isKilledShip(Ship* const);
 		Ship* const findShipByPosition(COORD const);
 		Ship* const findShipByPosition(int const, int const);
 
 		bool isOpenShips;
 
-		enum WalkStatus
+		enum WalkState
 		{
-			successful = 101,
-			unsuccessful = 102,
-			gameover = 103
+			Successful = 101,
+			Unsuccessful = 102,
+			Gameover = 103
 		};
 	protected:
 		Console* console;
@@ -77,15 +55,15 @@ class Field {
 		void drawField();
 		void drawShips();
 		void drawCell(
-			COORD const position, 
-			int const textColor = 15, 
-			int const backgroundColor = 0);
+			const COORD position, 
+			const int textColor = 15, 
+			const int backgroundColor = 0);
 		void clearField();
 		void updateBotGrid();
 		void updateBotShips();
 		void fillCellsAroundKilledShip();
-		void findPlaceToSheep(int const, int const);
-		bool const checkPositionAroundShip(Ship* const, COORD const);
+		void findPlaceToSheep(const int, const int);
+		const bool checkPositionAroundShip(Ship* const, const COORD);
 		Ship* const getCurrentShip();
 
 		Bot bot_;
@@ -99,11 +77,11 @@ class Field {
 		int height_;
 		bool active_;
 
-		enum CellStatus
+		enum CellState
 		{
-			empty = 0,
-			full = 1,
-			hit = 2,
-			miss = 3
+			Empty = 0,
+			Full = 1,
+			Hit = 2,
+			Miss = 3
 		};
 };

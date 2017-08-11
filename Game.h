@@ -1,10 +1,24 @@
 #include <iostream>
 #include <windows.h>
 #include <time.h>
+
+#ifndef STATEMENU_H
+#define STATEMENU_H
 #include "StateMenu.h"
+#endif
+
+#ifndef STATEPANEL_H
+#define STATEPANEL_H
 #include "StatePanel.h"
+#endif
+#ifndef TIMERPANEL_H
+#define TIMERPANEL_H
 #include "TimerPanel.h"
+#endif
+#ifndef FIELD_H
+#define FIELD_H
 #include "Field.h"
+#endif
 
 using namespace std;
 
@@ -16,11 +30,11 @@ class Game {
 		void draw();
 		void start();
 
-		enum GameStatus
+		enum GameState
 		{
-			userTurn = 0,
-			botTurn	 = 1,
-			gameover = 2
+			UserTurn = 0,
+			BotTurn	 = 1,
+			Gameover = 2
 		};
 	private:
 		TimerPanel* timerPanel_;

@@ -6,21 +6,19 @@ using namespace std;
 
 class Ship {
 	public:
-		Ship(){
-			type_ = vertical;
-		};
+		Ship();
 
-		void addCell(COORD const cell);
-		COORD const getCell(int const index);
-		bool const checkCell(COORD const cell);
+		void addCell(const COORD cell);
+		const COORD getCell(const int index);
+		const bool checkCell(const COORD cell);
 
-		int const size();
-		int const type();
+		const int size();
+		const int type();
 
-		enum ShipState
+		enum ShipLocation
 		{
-			vertical = 0,
-			horizontal = 1
+			Vertical = 0,
+			Horizontal = 1
 		};
 	private:
 		int type_;
