@@ -3,6 +3,11 @@
 #include "StateMenu.h"
 #endif
 
+StateMenu::StateMenu()
+{
+	console = Console::Instance();
+};
+
 void StateMenu::draw(
 	 const int playerShips,
 	 const int botShips,

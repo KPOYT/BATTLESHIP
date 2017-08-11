@@ -20,7 +20,7 @@ class Menu {
 
 		virtual const int show();
 	protected:
-		virtual void redrawMenu(int){};
+		virtual void redrawMenu(const int){};
 		virtual const int checkKeys(int mode){ return mode; };
 
 		Console* console;

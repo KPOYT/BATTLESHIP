@@ -3,7 +3,7 @@
 #include "ExitMenu.h"
 #endif
 
-void ExitMenu::redrawMenu(int mode) {
+void ExitMenu::redrawMenu(const int mode) {
 	switch(mode)
 	{
 		case 0:
@@ -17,7 +17,7 @@ void ExitMenu::redrawMenu(int mode) {
 	}
 }
 
-int const ExitMenu::checkKeys(int mode){
+const int ExitMenu::checkKeys(int mode){
 	bool isDone = false;
 	do 
 	{

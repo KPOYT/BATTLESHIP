@@ -9,9 +9,7 @@ using namespace std;
 
 class StateMenu {
 	public:
-		StateMenu(){
-			console = Console::Instance();
-		};
+		StateMenu();
 
 		void draw(
 			const int playerShips,

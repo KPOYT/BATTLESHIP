@@ -6,17 +6,17 @@
 class ExitMenu : public Menu {
 	public:
 		ExitMenu(
-			string const desc = "Are you sure"):Menu(desc){};
+			const string desc = "Are you sure"):Menu(desc){};
 
 		ExitMenu(
-			COORD const pos, 
-			string const desc = "Are you sure"):Menu(pos, desc){};
+			const COORD pos, 
+			const string desc = "Are you sure"):Menu(pos, desc){};
 
 		ExitMenu(
-			int const x,
-			int const y,
-			string const desc = "Are you sure"):Menu(x, y, desc){};
+			const int x,
+			const int y,
+			const string desc = "Are you sure"):Menu(x, y, desc){};
 	private:
-		void redrawMenu(int);
-		int const checkKeys(int);
+		void redrawMenu(const int);
+		const int checkKeys(int);
 };

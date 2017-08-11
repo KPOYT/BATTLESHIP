@@ -3,7 +3,7 @@
 #include "MainMenu.h"
 #endif
 
-void MainMenu::redrawMenu(int mode) {
+void MainMenu::redrawMenu(const int mode) {
 	switch(mode)
 	{
 		case 0:
@@ -17,7 +17,7 @@ void MainMenu::redrawMenu(int mode) {
 	}
 }
 
-int const MainMenu::checkKeys(int mode){
+const int MainMenu::checkKeys(int mode){
 	bool isDone = false;
 	do 
 	{
