@@ -1,20 +1,6 @@
 #include <conio.h>
 #include <time.h>
-
-#ifndef EXITPANEL_H
-#define EXITPANEL_H
-#include "ExitPanel.h"
-#endif
-
-#ifndef FIELD_H
-#define FIELD_H
 #include "Field.h"
-#endif
-
-#ifndef CELL_H
-#define CELL_H
-#include "Cell.h"
-#endif
 
 Field::Field()
 {

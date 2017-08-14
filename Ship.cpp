@@ -1,7 +1,4 @@
-#ifndef SHIP_H
-#define SHIP_H
 #include "Ship.h"
-#endif
 
 Ship::Ship() {
 	type_ = Vertical;

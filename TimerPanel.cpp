@@ -1,7 +1,4 @@
-#ifndef TIMERPANEL_H
-#define TIMERPANEL_H
 #include "TimerPanel.h"
-#endif
 
 TimerPanel::TimerPanel(const string desc):Panel(desc)
 {

@@ -1,7 +1,4 @@
-#ifndef EXITMENU_H
-#define EXITMENU_H
 #include "ExitMenu.h"
-#endif
 
 void ExitMenu::redrawMenu(const int mode) {
 	switch(mode)

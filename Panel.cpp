@@ -1,7 +1,4 @@
-#ifndef PANEL_H
-#define PANEL_H
 #include "Panel.h"
-#endif
 
 Panel::Panel(string const desc) {
 	position.X = 0; 

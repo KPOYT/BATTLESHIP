@@ -1,7 +1,4 @@
-#ifndef STATEMENU_H
-#define STATEMENU_H
 #include "StateMenu.h"
-#endif
 
 StateMenu::StateMenu()
 {

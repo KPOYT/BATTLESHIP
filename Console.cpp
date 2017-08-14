@@ -1,7 +1,4 @@
-#ifndef CONSOLE_H
-#define CONSOLE_H
 #include "Console.h"
-#endif
 
 Console* Console::_instance = 0;
 bool Console::_status = Free;

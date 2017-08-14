@@ -2,6 +2,16 @@
 #include <windows.h>
 #include <array>
 
+#ifndef EXITPANEL_H
+#define EXITPANEL_H
+#include "ExitPanel.h"
+#endif
+
+#ifndef CELL_H
+#define CELL_H
+#include "Cell.h"
+#endif
+
 #ifndef BOT_H
 #define BOT_H
 #include "Bot.h"

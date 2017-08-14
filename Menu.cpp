@@ -1,7 +1,4 @@
-#ifndef MENU_H
-#define MENU_H
 #include "Menu.h"
-#endif
 
 Menu::Menu(const string desc)
 {

@@ -1,7 +1,4 @@
-#ifndef CELL_H
-#define CELL_H
 #include "Cell.h"
-#endif
 
 Cell::Cell(const int x,
 			 const int y,

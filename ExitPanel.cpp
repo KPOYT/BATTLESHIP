@@ -1,7 +1,4 @@
-#ifndef EXITPANEL_H
-#define EXITPANEL_H
 #include "ExitPanel.h"
-#endif
 
 const int ExitPanel::show()
 {  

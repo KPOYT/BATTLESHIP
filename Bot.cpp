@@ -1,7 +1,4 @@
-#ifndef BOT_H
-#define BOT_H
 #include "Bot.h"
-#endif
 
 const COORD Bot::findCellToStrike(){
 	COORD coord;

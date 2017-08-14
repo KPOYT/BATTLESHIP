@@ -1,10 +1,6 @@
 #include <conio.h>
 #include <process.h>
-
-#ifndef GAME_H
-#define GAME_H
 #include "Game.h"
-#endif
 
 Game::Game(){
 	status_ = UserTurn;

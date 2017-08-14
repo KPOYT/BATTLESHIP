@@ -1,19 +1,7 @@
 #include <windows.h>
-
-#ifndef MAINMENU_H
-#define MAINMENU_H
 #include "MainMenu.h"
-#endif
-
-#ifndef EXITMENU_H
-#define EXITMENU_H
 #include "ExitMenu.h"
-#endif
-
-#ifndef GAME_H
-#define GAME_H
 #include "Game.h"
-#endif
 
 HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 

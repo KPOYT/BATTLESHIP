@@ -1,7 +1,4 @@
-#ifndef STATEPANEL_H
-#define STATEPANEL_H
 #include "StatePanel.h"
-#endif
 
 int const StatePanel::show()
 {  
