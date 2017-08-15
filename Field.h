@@ -43,11 +43,11 @@ class Field {
 		const int walk();
 		const int walkByBot();
 		const int leftShips();
-		const int checkCell(COORD const);
-		const int checkCell(int const, int const);
+		const int checkCell(const COORD);
+		const int checkCell(const int, const int);
 		const bool isKilledShip(Ship* const);
-		Ship* const findShipByPosition(COORD const);
-		Ship* const findShipByPosition(int const, int const);
+		Ship* const findShipByPosition(const COORD);
+		Ship* const findShipByPosition(const int, const int);
 
 		bool isOpenShips;
 
@@ -60,7 +60,7 @@ class Field {
 	protected:
 		Console* console;
 	private:
-		static int const MAX_SIZE = 10;
+		static const int MAX_SIZE = 10;
 
 		void drawField();
 		void drawShips();
