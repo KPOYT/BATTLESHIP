@@ -5,10 +5,13 @@
 
 class Bot {
 	public:
+		static const int MAX_SIZE = 10;
+		static const int MAX_SHIP_SIZE = 4;
+		
 		const COORD findCellToStrike();
 
-		int grid[10][10];
-		Ship* ships[10];
+		int grid[MAX_SIZE][MAX_SIZE];
+		Ship* ships[MAX_SIZE];
 	private:
 		void clearCells();
 		const int checkCell(const int x, const int y);
@@ -16,7 +19,7 @@ class Bot {
 		const COORD findRandomPlace();
 		Ship* const findShipByPosition(const int x, const int y);
 
-		COORD cells_[4];
+		COORD cells_[MAX_SHIP_SIZE];
 
 		int size_;
 		int type_;
