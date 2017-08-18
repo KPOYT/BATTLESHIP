@@ -22,5 +22,5 @@ void Cell::draw() {
 
 	console->fillSquare(" ", width_, height_, x_, y_);
 
-	console->setColor(console->White, console->Black);
+	console->setColor(Console::White, Console::Black);
 };

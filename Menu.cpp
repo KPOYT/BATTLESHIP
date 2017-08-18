@@ -30,7 +30,7 @@ const int Menu::show()
 	int mode = 0;
 	bool choise = false;
 
-	console->setColor(0,0);
+	console->setColor(Console::Black,Console::Black);
     system("cls");
 	
 	console->drawText(position.X, position.Y, description);

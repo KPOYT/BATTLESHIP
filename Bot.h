@@ -3,15 +3,17 @@
 #include "Ship.h"
 #endif
 
+#ifndef CONFIG_H
+#define CONFIG_H
+#include "Config.h"
+#endif
+
 class Bot {
 	public:
-		static const int MAX_SIZE = 10;
-		static const int MAX_SHIP_SIZE = 4;
-		
 		const COORD findCellToStrike();
 
-		int grid[MAX_SIZE][MAX_SIZE];
-		Ship* ships[MAX_SIZE];
+		int grid[Config::FIELD_WIDTH][Config::FIELD_HEIGHT];
+		Ship* ships[Config::MAX_SHIPS];
 	private:
 		void clearCells();
 		const int checkCell(const int x, const int y);
@@ -19,7 +21,7 @@ class Bot {
 		const COORD findRandomPlace();
 		Ship* const findShipByPosition(const int x, const int y);
 
-		COORD cells_[MAX_SHIP_SIZE];
+		COORD cells_[Config::MAX_SHIP_SIZE];
 
 		int size_;
 		int type_;

@@ -22,6 +22,11 @@
 #include "Ship.h"
 #endif
 
+#ifndef CONFIG_H
+#define CONFIG_H
+#include "Config.h"
+#endif
+
 #ifndef CONSOLE_H
 #define CONSOLE_H
 #include "Console.h"
@@ -34,8 +39,8 @@ class Field {
 		Field();
 		Field(const int x,
 			 const int y,
-			 const int width = 22,
-			 const int height = 22);
+			 const int width = Config::FIELD_WIDTH_SIZE,
+			 const int height = Config::FIELD_HEIGHT_SIZE);
 		~Field();
 		
 		void draw();
@@ -60,14 +65,12 @@ class Field {
 	protected:
 		Console* console;
 	private:
-		static const int MAX_SIZE = 10;
-
 		void drawField();
 		void drawShips();
 		void drawCell(
 			const COORD position, 
-			const int textColor = 15, 
-			const int backgroundColor = 0);
+			const int textColor = Console::White, 
+			const int backgroundColor = Console::Black);
 		void clearField();
 		void updateBotGrid();
 		void updateBotShips();
@@ -79,8 +82,8 @@ class Field {
 		Bot bot_;
 		COORD position_;
 		COORD oldPosition_;
-		Ship* ships_[MAX_SIZE];
-		int grid_[MAX_SIZE][MAX_SIZE];
+		Ship* ships_[Config::MAX_SHIPS];
+		int grid_[Config::FIELD_WIDTH][Config::FIELD_HEIGHT];
 		int x_;
 		int y_;
 		int width_;

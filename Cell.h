@@ -1,6 +1,11 @@
 #include <iostream>
 #include <windows.h>
 
+#ifndef CONFIG_H
+#define CONFIG_H
+#include "Config.h"
+#endif
+
 #ifndef CONSOLE_H
 #define CONSOLE_H
 #include "Console.h"
@@ -12,10 +17,10 @@ class Cell {
 	public:
 		Cell(const int x,
 			 const int y,
-			 const int textColor = 15,
-			 const int backgroundColor = 0,
-			 const int width = 2,
-			 const int height = 2);
+			 const int textColor = Console::White,
+			 const int backgroundColor = Console::Black,
+			 const int width = Config::CELL_WIDTH,
+			 const int height = Config::CELL_HEIGHT);
 
 		void draw();
 	private:

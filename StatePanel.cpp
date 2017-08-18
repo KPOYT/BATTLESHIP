@@ -2,7 +2,7 @@
 
 int const StatePanel::show()
 {  
-	int mode = 10;
+	int mode = Config::MAX_SHIPS;
 	bool choise = false;
 	
 	console->drawText(position.X, position.Y, description);

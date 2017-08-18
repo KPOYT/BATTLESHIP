@@ -25,13 +25,13 @@ class StatePanel : public Panel {
 
 		void redrawPanel(
 			const int count, 
-			const int textColor = 15,
-			const int backgroundColor = 0);
+			const int textColor = Console::White,
+			const int backgroundColor = Console::Black);
 
 		void redrawPanel(
 			const string count,
-			const int textColor = 15,
-			const int backgroundColor = 0);
+			const int textColor = Console::White,
+			const int backgroundColor = Console::Black);
 	private:
 		string counter_;
 };

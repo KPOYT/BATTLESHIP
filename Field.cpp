@@ -6,8 +6,8 @@ Field::Field()
 {
 	x_ = 0;
 	y_ = 0;
-	width_ = 22;
-	height_ = 22;
+	width_ = Config::FIELD_WIDTH;
+	height_ = Config::FIELD_HEIGHT;
 	active_ = false;
 	position_.X = 0;
 	position_.Y = 0;
@@ -41,14 +41,14 @@ void Field::generate() {
 
 	clearField();
 
-	for(int i = 0; i < MAX_SIZE; i++){
+	for(int i = 0; i < Config::MAX_SHIPS; i++){
 		findPlaceToSheep(sheeps[i], i);
 	}
 }
 
 void Field::clearField(){
-	for(int i = 0; i < MAX_SIZE; i++){
-		for(int j = 0; j < MAX_SIZE; j++){
+	for(int i = 0; i < Config::FIELD_WIDTH; i++){
+		for(int j = 0; j < Config::FIELD_HEIGHT; j++){
 			grid_[i][j] = 0;
 		}
 	}
@@ -62,9 +62,9 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 
 	do
 	{
-		int x = 0 + rand() % MAX_SIZE;
-		int y = 0 + rand() % MAX_SIZE;
-		int rotate = 0 + rand() % MAX_SIZE;
+		int x = 0 + rand() % Config::FIELD_WIDTH;
+		int y = 0 + rand() % Config::FIELD_HEIGHT;
+		int rotate = 0 + rand() % Config::MAX_SHIPS;
 		bool clear = true;
 
 		for(int i = -1; i <= shipType; i++)
@@ -72,7 +72,7 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 			for(int j = -1; j <= 1; j++)
 			{
 				if(rotate < 5){
-					if(x+i >= MAX_SIZE && i < shipType) {
+					if(x+i >= Config::FIELD_WIDTH && i < shipType) {
 						clear = false;
 						break;
 					}
@@ -82,7 +82,7 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 				}
 				else
 				{
-					if(y+i >= MAX_SIZE && i < shipType) {
+					if(y+i >= Config::FIELD_HEIGHT && i < shipType) {
 						clear = false;
 						break;
 					}
@@ -123,7 +123,7 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 const int Field::walk() {
 	active_ = true;
 
-	drawCell(position_, console->Yellow, console->Yellow);
+	drawCell(position_, Console::Yellow, Console::Yellow);
 
 	bool isDone = false;
 	do
@@ -184,7 +184,7 @@ const int Field::walk() {
 					break;
 				}
 			}
-			drawCell(position_, console->Yellow, console->Yellow);
+			drawCell(position_, Console::Yellow, Console::Yellow);
 			drawCell(oldPosition_);
 			drawShips();
 		}
@@ -262,15 +262,15 @@ const int Field::walkByBot() {
 }
 
 void Field::updateBotGrid() {
-	for(int i = 0; i < MAX_SIZE; i++){
-		for(int j = 0; j < MAX_SIZE; j++){
+	for(int i = 0; i < Config::FIELD_WIDTH; i++){
+		for(int j = 0; j < Config::FIELD_HEIGHT; j++){
 			bot_.grid[i][j] = grid_[i][j];
 		}
 	}
 }
 
 void Field::updateBotShips() {
-	for(int i = 0; i < MAX_SIZE; i++){
+	for(int i = 0; i < Config::MAX_SHIPS; i++){
 		bot_.ships[i] = ships_[i];
 	}
 }
@@ -298,10 +298,10 @@ void Field::fillCellsAroundKilledShip() {
 					break;
 			}
 
-			if(coord.X < 0 || coord.X >= MAX_SIZE)
+			if(coord.X < 0 || coord.X >= Config::FIELD_WIDTH)
 				continue;
 
-			if(coord.Y < 0 || coord.Y >= MAX_SIZE)
+			if(coord.Y < 0 || coord.Y >= Config::FIELD_HEIGHT)
 				continue;
 
 			if(checkPositionAroundShip(ship, coord))
@@ -311,9 +311,9 @@ void Field::fillCellsAroundKilledShip() {
 }
 
 const int Field::leftShips(){
-	int max = MAX_SIZE;
+	int max = Config::MAX_SHIPS;
 
-	for(int s = 0; s < MAX_SIZE; s++){
+	for(int s = 0; s < Config::MAX_SHIPS; s++){
 		if(isKilledShip(ships_[s]))
 			max--;
 	};
@@ -322,7 +322,7 @@ const int Field::leftShips(){
 }
 
 Ship* const Field::getCurrentShip(){
-	for(int s = 0; s < MAX_SIZE; s++){
+	for(int s = 0; s < Config::MAX_SHIPS; s++){
 		if(ships_[s]->checkCell(position_))
 			return ships_[s];
 	}
@@ -331,7 +331,7 @@ Ship* const Field::getCurrentShip(){
 }
 
 Ship* const Field::findShipByPosition(const COORD coord){
-	for(int s = 0; s < MAX_SIZE; s++){
+	for(int s = 0; s < Config::MAX_SHIPS; s++){
 		if(ships_[s]->checkCell(coord))
 			return ships_[s];
 	}
@@ -344,7 +344,7 @@ Ship* const Field::findShipByPosition(const int x, const int y){
 	coord.X = x;
 	coord.Y = y;
 
-	for(int s = 0; s < MAX_SIZE; s++){
+	for(int s = 0; s < Config::MAX_SHIPS; s++){
 		if(ships_[s]->checkCell(coord))
 			return ships_[s];
 	}
@@ -378,7 +378,7 @@ void Field::draw() {
 	drawShips();
 
 	if(active_)
-		drawCell(position_, console->Yellow, console->Yellow);
+		drawCell(position_, Console::Yellow, Console::Yellow);
 }
 
 void Field::drawField(){
@@ -392,8 +392,8 @@ void Field::drawField(){
 void Field::drawShips(){
 	COORD coords;
 	
-	for(int i = 0; i < 10; i++){
-		for(int j = 0; j < 10; j++){
+	for(int i = 0; i < Config::FIELD_WIDTH; i++){
+		for(int j = 0; j < Config::FIELD_HEIGHT; j++){
 			if(active_ && position_.X == i && position_.Y == j)
 				continue;
 
@@ -440,7 +440,9 @@ void Field::drawCell(COORD position, const int textColor, const int backgroundCo
 	coords.X = x_ + 1;
 	coords.Y = y_ + 1;
 
-	Cell cell(coords.X + position.X * 2, coords.Y + position.Y * 2, textColor, backgroundColor);
+	Cell cell(coords.X + position.X * Config::CELL_WIDTH,
+			coords.Y + position.Y * Config::CELL_HEIGHT, 
+			textColor, backgroundColor);
 	cell.draw();
 
 	console->setColor(console->White, console->Black);

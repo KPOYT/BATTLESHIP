@@ -40,7 +40,7 @@ Ship* const Bot::findShipByPosition(const int x, const int y){
 	coord.X = x;
 	coord.Y = y;
 
-	for(int s = 0; s < 10; s++){
+	for(int s = 0; s < Config::MAX_SHIPS; s++){
 		if(ships[s]->checkCell(coord))
 			return ships[s];
 	}
@@ -56,8 +56,8 @@ const COORD Bot::findRandomPlace() {
 	bool isDone = false;
 	do
 	{
-		int x = rand() %10;
-		int y = rand() %10;
+		int x = rand() % Config::FIELD_WIDTH;
+		int y = rand() % Config::FIELD_HEIGHT;
 		
 		int c = checkCell(x, y);
 		switch(c){
