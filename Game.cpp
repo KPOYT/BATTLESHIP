@@ -27,7 +27,7 @@ void timerUpdate(void* pParams){
 		bool isBusy = console->status();
 		if(!isBusy){
 			int time = clock() / CLOCKS_PER_SEC - ptr->start;
-			ptr->panel->redrawTimer(time);
+			ptr->panel->redrawPanel(time);
 			Sleep(1000);
 		}
 	}while(!ptr->panel->isFinished);
@@ -45,7 +45,7 @@ void Game::draw() {
 	
 	statePanel_ = new StatePanel(38, 10, "Turn:");
 	statePanel_->show();
-	statePanel_->redrawPanel("Your", 2);
+	statePanel_->redrawPanel("Your", Console::Green);
 
 	userStatePanel_ = new StatePanel(4, 5);
 	userStatePanel_->show();
@@ -53,12 +53,12 @@ void Game::draw() {
 	botStatePanel_ = new StatePanel(70, 5);
 	botStatePanel_->show();
 
-	userField_ = new Field(14, 1, 22, 22);
+	userField_ = new Field(14, 1);
 	userField_->generate();
 	userField_->isOpenShips = true;
 	userField_->draw();
 
-	botField_ = new Field(44, 1, 22, 22);
+	botField_ = new Field(44, 1);
 	botField_->generate();
 	botField_->isOpenShips = false;
 	botField_->draw();
@@ -72,7 +72,7 @@ void Game::start() {
 		int success;
 		if(status_ == UserTurn)
 		{
-			statePanel_->redrawPanel("Your", 2);
+			statePanel_->redrawPanel("Your", Console::Green);
 
 			success = botField_->walk();
 
@@ -88,7 +88,7 @@ void Game::start() {
 
 					int time = clock() / CLOCKS_PER_SEC - startTime_;
 					StateMenu menu;
-					menu.draw(userField_->leftShips(), botField_->leftShips(), time);
+					menu.show(userField_->leftShips(), botField_->leftShips(), time);
 					botField_->draw();
 					_getch();
 
@@ -98,7 +98,7 @@ void Game::start() {
 		}
 		else if(status_ == BotTurn)
 		{
-			statePanel_->redrawPanel("Bot", 4);
+			statePanel_->redrawPanel("Bot", Console::Red);
 
 			success = userField_->walkByBot();
 			
@@ -114,7 +114,7 @@ void Game::start() {
 
 					int time = clock() / CLOCKS_PER_SEC - startTime_;
 					StateMenu menu;
-					menu.draw(userField_->leftShips(), botField_->leftShips(), time);
+					menu.show(userField_->leftShips(), botField_->leftShips(), time);
 					botField_->draw();
 					_getch();
 					
