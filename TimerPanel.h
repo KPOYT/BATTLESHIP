@@ -20,9 +20,9 @@ class TimerPanel : public Panel {
 
 		const int show();
 
-		void redrawTimer(const int time, 
-						const int textColor = 15, 
-						const int backgroundColor = 0);
+		void redrawPanel(const int time, 
+						const int textColor = Console::White, 
+						const int backgroundColor = Console::Black);
 
 		bool isFinished;
 	private:

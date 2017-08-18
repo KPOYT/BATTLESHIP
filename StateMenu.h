@@ -1,20 +1,20 @@
-#include <conio.h>
-
-#ifndef CONSOLE_H
-#define CONSOLE_H
-#include "Console.h"
+#ifndef MENU_H
+#define MENU_H
+#include "Menu.h"
 #endif
 
-using namespace std;
-
-class StateMenu {
+class StateMenu : public Menu {
 	public:
 		StateMenu();
 
-		void draw(
+		const int show(
 			const int playerShips,
 			const int botShips,
 			const int time);
+		/*void draw(
+			const int playerShips,
+			const int botShips,
+			const int time);*/
 	protected:
 		Console* console;
 };

@@ -25,18 +25,17 @@ TimerPanel::~TimerPanel()
 };
 
 const int TimerPanel::show()
-{  
-	int mode = 0;
+{
 	bool choise = false;
 	
 	console->drawText(position.X, position.Y, description);
 
-	redrawTimer(mode);
+	redrawPanel(NULL);
 	
-	return mode;
+	return NULL;
 }
 
-void TimerPanel::redrawTimer(
+void TimerPanel::redrawPanel(
 	 const int time, 
 	 const int textColor,
 	 const int backgroundColor)

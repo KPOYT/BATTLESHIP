@@ -5,7 +5,7 @@ StateMenu::StateMenu()
 	console = Console::Instance();
 };
 
-void StateMenu::draw(
+const int StateMenu::show(
 	 const int playerShips,
 	 const int botShips,
 	 const int time)
@@ -24,4 +24,6 @@ void StateMenu::draw(
 	console->drawText(28, 12, to_string(botShips));
 	console->drawText(10, 14, "Time:");
 	console->drawText(28, 14, to_string(time));
+
+	return NULL;
 };
