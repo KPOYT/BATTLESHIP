@@ -1,5 +1,17 @@
 #include "MainMenu.h"
 
+MainMenu::MainMenu(
+	const string desc):Menu(desc){};
+
+MainMenu::MainMenu(
+	const COORD pos, 
+	const string desc):Menu(pos, desc){};
+
+MainMenu::MainMenu(
+	const int x,
+	const int y,
+	const string desc):Menu(x, y, desc){};
+
 void MainMenu::redrawMenu(const int mode) {
 	switch(mode)
 	{

@@ -19,8 +19,8 @@ class BattleShip {
 
 		const int startGame();
 	protected:
-		BattleShip(){};
-		~BattleShip(){};
+		BattleShip();
+		~BattleShip();
 	private:
 		static BattleShip* _instance;
 };

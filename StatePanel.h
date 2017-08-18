@@ -6,20 +6,18 @@
 class StatePanel : public Panel {
 	public:
 		StatePanel(
-			const string desc = "Ships:"):Panel(desc) {};
+			const string desc = "Ships:");
 		
 		StatePanel(
 			const COORD pos, 
-			const string desc = "Ships:"):Panel(pos, desc){};
+			const string desc = "Ships:");
 		
 		StatePanel(
 			const int x, 
 			const int y, 
-			const string desc = "Ships:"):Panel(x, y, desc) {};
+			const string desc = "Ships:");
 		
-		~StatePanel(){
-			console->fillSquare(" ", 8, 2, position.X - 1, position.Y);
-		};
+		~StatePanel();
 
 		const int show();
 

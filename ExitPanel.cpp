@@ -1,5 +1,21 @@
 #include "ExitPanel.h"
 
+ExitPanel::ExitPanel(
+	const string desc):Panel(desc) {};
+
+ExitPanel::ExitPanel(
+	const COORD pos, 
+	const string desc):Panel(pos, desc) {};
+		
+ExitPanel::ExitPanel(
+	const int x, 
+	const int y, 
+	const string desc):Panel(x, y, desc) {};
+		
+ExitPanel::~ExitPanel(){
+	console->fillLine(" ", description.length() + 9, position.X, position.Y, false);
+};
+
 const int ExitPanel::show()
 {  
 	int mode = 0;

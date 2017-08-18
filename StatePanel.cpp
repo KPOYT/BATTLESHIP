@@ -1,5 +1,21 @@
 #include "StatePanel.h"
 
+StatePanel::StatePanel(
+	const string desc):Panel(desc) {};
+		
+StatePanel::StatePanel(
+	const COORD pos, 
+	const string desc):Panel(pos, desc){};
+		
+StatePanel::StatePanel(
+	const int x, 
+	const int y, 
+	const string desc):Panel(x, y, desc) {};
+		
+StatePanel::~StatePanel(){
+	console->fillSquare(" ", 8, 2, position.X - 1, position.Y);
+};
+
 int const StatePanel::show()
 {  
 	int mode = Config::MAX_SHIPS;

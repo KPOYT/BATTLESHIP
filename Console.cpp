@@ -1,5 +1,8 @@
 #include "Console.h"
 
+Console::Console(){};
+Console::~Console(){};
+
 Console* Console::_instance = 0;
 bool Console::_status = Free;
 

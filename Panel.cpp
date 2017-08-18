@@ -19,3 +19,10 @@ Panel::Panel(const int x, const int y, const string desc){
 	description = desc;
 	console = Console::Instance();
 };
+
+const int Panel::show(){ return -1; };
+
+void Panel::redrawMenu(
+			int mode, 
+			int textColor, 
+			int backgroundColor){};

@@ -6,16 +6,16 @@
 class MainMenu : public Menu {
 	public:
 		MainMenu(
-			const string desc = ""):Menu(desc){};
+			const string desc = "");
 
 		MainMenu(
 			const COORD pos, 
-			const string desc = ""):Menu(pos, desc){};
+			const string desc = "");
 
 		MainMenu(
 			const int x,
 			const int y,
-			const string desc = ""):Menu(x, y, desc){};
+			const string desc = "");
 	private:
 		void redrawMenu(const int);
 		const int checkKeys(int);

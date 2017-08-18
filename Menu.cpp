@@ -25,6 +25,10 @@ Menu::Menu(const int x,
 	console = Console::Instance();
 };
 
+void Menu::redrawMenu(const int){};
+
+const int Menu::checkKeys(int mode){ return mode; };
+
 const int Menu::show()
 {
 	int mode = 0;
@@ -40,4 +44,4 @@ const int Menu::show()
 	mode = checkKeys(mode);
 	
 	return mode;
-}
+};

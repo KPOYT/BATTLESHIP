@@ -1,5 +1,8 @@
 #include "BattleShip.h"
 
+BattleShip::BattleShip(){};
+BattleShip::~BattleShip(){};
+
 BattleShip* BattleShip::_instance = 0;
 
 BattleShip* BattleShip::Instance(){

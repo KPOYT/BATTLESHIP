@@ -6,20 +6,18 @@
 class ExitPanel : public Panel {
 	public:
 		ExitPanel(
-			const string desc = "Are you sure?"):Panel(desc) {};
+			const string desc = "Are you sure?");
 
 		ExitPanel(
 			const COORD pos, 
-			const string desc = "Are you sure?"):Panel(pos, desc) {};
+			const string desc = "Are you sure?");
 		
 		ExitPanel(
 			const int x, 
 			const int y, 
-			const string desc = "Are you sure?"):Panel(x, y, desc) {};
+			const string desc = "Are you sure?");
 		
-		~ExitPanel(){
-			console->fillLine(" ", description.length() + 9, position.X, position.Y, false);
-		};
+		~ExitPanel();
 
 		const int show();
 	private:

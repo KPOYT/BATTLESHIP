@@ -88,8 +88,8 @@ class Console {
 		};
 
 	protected:
-		Console(){};
-		~Console(){};
+		Console();
+		~Console();
 
 	private:
 		static Console* _instance;

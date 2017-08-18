@@ -11,10 +11,6 @@ class StateMenu : public Menu {
 			const int playerShips,
 			const int botShips,
 			const int time);
-		/*void draw(
-			const int playerShips,
-			const int botShips,
-			const int time);*/
 	protected:
 		Console* console;
 };

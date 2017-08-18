@@ -1,5 +1,17 @@
 #include "ExitMenu.h"
 
+ExitMenu::ExitMenu(
+	const string desc):Menu(desc){};
+
+ExitMenu::ExitMenu(
+	const COORD pos, 
+	const string desc):Menu(pos, desc){};
+
+ExitMenu::ExitMenu(
+	const int x,
+	const int y,
+	const string desc):Menu(x, y, desc){};
+
 void ExitMenu::redrawMenu(const int mode) {
 	switch(mode)
 	{

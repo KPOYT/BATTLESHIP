@@ -14,16 +14,19 @@ using namespace std;
 
 class Panel {
 	public:
-		Panel(const string desc = "Are you sure?");
+		Panel(const string desc);
 
 		Panel(const COORD pos, const string desc);
 		
 		Panel(const int x, const int y, const string desc);
 
-		virtual const int show(){ return -1; };
+		virtual const int show();
 
 	protected:
-		virtual void redrawMenu(int mode, int textColor = 15, int backgroundColor = 0){};
+		virtual void redrawMenu(
+							int mode, 
+							int textColor = 15, 
+							int backgroundColor = 0);
 
 		Console* console;
 		COORD position;
