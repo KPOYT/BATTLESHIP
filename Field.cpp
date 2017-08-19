@@ -440,8 +440,8 @@ void Field::drawCell(COORD position, const int textColor, const int backgroundCo
 	coords.X = x_ + 1;
 	coords.Y = y_ + 1;
 
-	Cell cell(coords.X + position.X * Config::CELL_WIDTH,
-			coords.Y + position.Y * Config::CELL_HEIGHT, 
+	Cell cell(coords.X + position.X * Config::CELL_VIEW_WIDTH,
+			coords.Y + position.Y * Config::CELL_VIEW_HEIGHT, 
 			textColor, backgroundColor);
 	cell.draw();
 

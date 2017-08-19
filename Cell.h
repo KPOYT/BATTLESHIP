@@ -19,8 +19,8 @@ class Cell {
 			 const int y,
 			 const int textColor = Console::White,
 			 const int backgroundColor = Console::Black,
-			 const int width = Config::CELL_WIDTH,
-			 const int height = Config::CELL_HEIGHT);
+			 const int width = Config::CELL_VIEW_WIDTH,
+			 const int height = Config::CELL_VIEW_HEIGHT);
 
 		void draw();
 	private:
