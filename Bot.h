@@ -3,6 +3,11 @@
 #include "Ship.h"
 #endif
 
+#ifndef CELL_H
+#define CELL_H
+#include "Cell.h"
+#endif
+
 #ifndef CONFIG_H
 #define CONFIG_H
 #include "Config.h"
@@ -12,7 +17,7 @@ class Bot {
 	public:
 		const COORD findCellToStrike();
 
-		int grid[Config::FIELD_WIDTH][Config::FIELD_HEIGHT];
+		Cell* grid[Config::FIELD_WIDTH][Config::FIELD_HEIGHT];
 		Ship* ships[Config::MAX_SHIPS];
 	private:
 		void clearCells();
@@ -31,13 +36,5 @@ class Bot {
 			Vertical = 0,
 			Horizontal = 1,
 			Unknown = -1
-		};
-
-		enum CellState
-		{
-			Empty = 0,
-			Full = 1,
-			Hit = 2,
-			Miss = 3
 		};
 };

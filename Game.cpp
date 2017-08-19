@@ -9,9 +9,6 @@ Game::Game(){
 
 Game::~Game(){
 	delete timerPanel_;
-	delete statePanel_;
-	delete userStatePanel_;
-	delete botStatePanel_;
 	delete userField_;
 	delete botField_;
 };

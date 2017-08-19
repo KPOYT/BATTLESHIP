@@ -47,9 +47,14 @@ void Field::generate() {
 }
 
 void Field::clearField(){
+	COORD coords;
+	coords.X = x_ + 1;
+	coords.Y = y_ + 1;
+
 	for(int i = 0; i < Config::FIELD_WIDTH; i++){
 		for(int j = 0; j < Config::FIELD_HEIGHT; j++){
-			grid_[i][j] = 0;
+			grid_[i][j] = new Cell(coords.X + i * Config::CELL_VIEW_WIDTH,
+				coords.Y + j * Config::CELL_VIEW_HEIGHT);
 		}
 	}
 }
@@ -77,7 +82,12 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 						break;
 					}
 
-					if(grid_[x+i][y+j] != Empty)
+					if(x+i < 0 
+						|| y+j < 0 
+						|| x+i >= Config::FIELD_WIDTH 
+						|| y+j >= Config::FIELD_HEIGHT) continue;
+
+					if(grid_[x+i][y+j]->getStatus() != Cell::Empty)
 						clear = false;
 				}
 				else
@@ -87,7 +97,12 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 						break;
 					}
 
-					if(grid_[x+j][y+i] != Empty)
+					if(x+j < 0 
+						|| y+i < 0 
+						|| x+j >= Config::FIELD_WIDTH 
+						|| y+i >= Config::FIELD_HEIGHT) continue;
+
+					if(grid_[x+j][y+i]->getStatus() != Cell::Empty)
 						clear = false;
 				}
 			}
@@ -98,7 +113,7 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 			for(int i = 0; i < shipType; i++){
 				if(rotate < 5)
 				{
-					grid_[x+i][y] = Full;
+					grid_[x+i][y]->setStatus(Cell::Full);
 					COORD pos;
 					pos.X = x+i;
 					pos.Y = y;
@@ -107,7 +122,7 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 				}
 				else
 				{
-					grid_[x][y+i] = Full;
+					grid_[x][y+i]->setStatus(Cell::Full);
 					COORD pos;
 					pos.X = x;
 					pos.Y = y+i;
@@ -123,7 +138,7 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 const int Field::walk() {
 	active_ = true;
 
-	drawCell(position_, Console::Yellow, Console::Yellow);
+	drawCell(position_, Cell::Active);
 
 	bool isDone = false;
 	do
@@ -184,8 +199,8 @@ const int Field::walk() {
 					break;
 				}
 			}
-			drawCell(position_, Console::Yellow, Console::Yellow);
-			drawCell(oldPosition_);
+			drawCell(position_, Cell::Active);
+			drawCell(oldPosition_, Cell::Inactive);
 			drawShips();
 		}
 		else 
@@ -193,22 +208,22 @@ const int Field::walk() {
 			switch(code)
 			{
 				case VK_RETURN:
-					switch(grid_[position_.X][position_.Y]){
-						case Empty: {
-							grid_[position_.X][position_.Y] = Miss;
+					switch(grid_[position_.X][position_.Y]->getStatus()){
+						case Cell::Empty: {
+							grid_[position_.X][position_.Y]->setStatus(Cell::Miss);
 							active_ = false;
 							isDone = true;
-							drawCell(position_);
+							drawCell(position_, Cell::Inactive);
 							drawShips();
 
 							return Unsuccessful;
 						}
-						case Full: {
-							grid_[position_.X][position_.Y] = Hit;
+						case Cell::Full: {
+							grid_[position_.X][position_.Y]->setStatus(Cell::Hit);
 							active_ = false;
 							isDone = true;
 							fillCellsAroundKilledShip();
-							drawCell(position_);
+							drawCell(position_, Cell::Inactive);
 							drawShips();
 
 							return Successful;
@@ -240,18 +255,18 @@ const int Field::walkByBot() {
 	COORD coord = bot_.findCellToStrike();
 	position_ = coord;
 
-	switch(grid_[coord.X][coord.Y]){
-		case Empty: {
-			grid_[coord.X][coord.Y] = Miss;
-			drawCell(coord);
+	switch(grid_[coord.X][coord.Y]->getStatus()){
+		case Cell::Empty: {
+			grid_[coord.X][coord.Y]->setStatus(Cell::Miss);
+			drawCell(coord, Cell::Inactive);
 			drawShips();
 
 			return Unsuccessful;
 		}
-		case Full: {
-			grid_[coord.X][coord.Y] = Hit;
+		case Cell::Full: {
+			grid_[coord.X][coord.Y]->setStatus(Cell::Hit);
 			fillCellsAroundKilledShip();
-			drawCell(position_);
+			drawCell(position_, Cell::Inactive);
 			drawShips();
 
 			return Successful;
@@ -305,7 +320,7 @@ void Field::fillCellsAroundKilledShip() {
 				continue;
 
 			if(checkPositionAroundShip(ship, coord))
-				grid_[coord.X][coord.Y] = Miss;
+				grid_[coord.X][coord.Y]->setStatus(Cell::Miss);
 		}
 	}
 }
@@ -365,7 +380,7 @@ const bool Field::checkPositionAroundShip(Ship* const ship, const COORD position
 bool const Field::isKilledShip(Ship* const ship) {
 	for(int j = 0; j < ship->size(); j++){
 		COORD cell = ship->getCell(j);
-		if(grid_[cell.X][cell.Y] != Hit)
+		if(grid_[cell.X][cell.Y]->getStatus() != Cell::Hit)
 			return false;
 	}
 
@@ -378,7 +393,7 @@ void Field::draw() {
 	drawShips();
 
 	if(active_)
-		drawCell(position_, Console::Yellow, Console::Yellow);
+		drawCell(position_, Cell::Active);
 }
 
 void Field::drawField(){
@@ -400,34 +415,20 @@ void Field::drawShips(){
 			coords.X = i;
 			coords.Y = j;
 
-			switch(grid_[i][j]){
-				case Full:{
-					if(isOpenShips)
-						drawCell(coords, console->Cyan, console->Cyan);
-					break;
-				}
-				case Miss:{
-					drawCell(coords, console->Magenta, console->Magenta);
-					break;
-				}
-				case Hit:{
-					drawCell(coords, console->Red, console->Red);
-					break;
-				}
-			}
+			drawCell(coords, Cell::Inactive);
 		}
 	}
 }
 
-int const Field::checkCell(const COORD position){
-	return grid_[position.X][position.Y];
+const int Field::checkCell(const COORD position){
+	return grid_[position.X][position.Y]->getStatus();
 }
 
-int const Field::checkCell(const int x, const int y){
-	return grid_[x][y];
+const int Field::checkCell(const int x, const int y){
+	return grid_[x][y]->getStatus();
 }
 
-void Field::drawCell(COORD position, const int textColor, const int backgroundColor){
+void Field::drawCell(COORD position, const bool mode){
 	console->setColor(console->White, console->Black);
 
 	if(position.X < 0)
@@ -436,14 +437,9 @@ void Field::drawCell(COORD position, const int textColor, const int backgroundCo
 	if(position.Y < 0)
 		position.Y = 0;
 
-	COORD coords;
-	coords.X = x_ + 1;
-	coords.Y = y_ + 1;
-
-	Cell cell(coords.X + position.X * Config::CELL_VIEW_WIDTH,
-			coords.Y + position.Y * Config::CELL_VIEW_HEIGHT, 
-			textColor, backgroundColor);
-	cell.draw();
+	grid_[position.X][position.Y]->setMode(mode);
+	grid_[position.X][position.Y]->openCell(isOpenShips);
+	grid_[position.X][position.Y]->draw();
 
 	console->setColor(console->White, console->Black);
 }

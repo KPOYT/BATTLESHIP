@@ -22,13 +22,19 @@ void Bot::clearCells(){
 };
 
 const int Bot::checkCell(const int x, const int y){
-	return grid[x][y];
+	return grid[x][y]->getStatus();
 }
 
 const bool Bot::checkKilledShip(Ship* const ship) {
 	for(int j = 0; j < ship->size(); j++){
 		COORD cell = ship->getCell(j);
-		if(grid[cell.X][cell.Y] != Hit)
+
+		if(cell.X < 0 
+			|| cell.Y < 0 
+			|| cell.X >= Config::FIELD_WIDTH 
+			|| cell.Y >= Config::FIELD_HEIGHT) continue;
+
+		if(grid[cell.X][cell.Y]->getStatus() != Cell::Hit)
 			return false;
 	}
 			
@@ -61,12 +67,12 @@ const COORD Bot::findRandomPlace() {
 		
 		int c = checkCell(x, y);
 		switch(c){
-			case Empty:
+			case Cell::Empty:
 				coord.X = x;
 				coord.Y = y;
 				isDone = true;
 			break;
-			case Full:
+			case Cell::Full:
 				Ship* ship = findShipByPosition(x, y);
 
 				coord.X = x;

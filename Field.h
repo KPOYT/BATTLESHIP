@@ -69,8 +69,7 @@ class Field {
 		void drawShips();
 		void drawCell(
 			const COORD position, 
-			const int textColor = Console::White, 
-			const int backgroundColor = Console::Black);
+			const bool mode);
 		void clearField();
 		void updateBotGrid();
 		void updateBotShips();
@@ -83,18 +82,10 @@ class Field {
 		COORD position_;
 		COORD oldPosition_;
 		Ship* ships_[Config::MAX_SHIPS];
-		int grid_[Config::FIELD_WIDTH][Config::FIELD_HEIGHT];
+		Cell* grid_[Config::FIELD_WIDTH][Config::FIELD_HEIGHT];
 		int x_;
 		int y_;
 		int width_;
 		int height_;
 		bool active_;
-
-		enum CellState
-		{
-			Empty = 0,
-			Full = 1,
-			Hit = 2,
-			Miss = 3
-		};
 };
