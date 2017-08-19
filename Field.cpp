@@ -31,9 +31,13 @@ Field::Field(const int x,
 
 Field::~Field()
 {
-	int size = sizeof(ships_) / sizeof(Ship);
-	for(int i = 0; i < size; i++)
+	for(int i = 0; i < Config::MAX_SHIPS; i++)
 		delete ships_[i];
+
+	for(int i = 0; i < Config::CELL_VIEW_WIDTH; i++){
+		for(int j = 0; j < Config::CELL_VIEW_HEIGHT; j++)
+			delete grid_[i][j];
+	}
 };
 
 void Field::generate() {
