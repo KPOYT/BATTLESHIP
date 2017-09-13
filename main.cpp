@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "BattleShip.h"
+#include "Game\BattleShip.h"
 
 const BOOL ShowConsoleCursor(const BOOL bShow)
 {
