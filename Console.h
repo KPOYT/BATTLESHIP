@@ -13,15 +13,18 @@ class Console {
 			const int y, 
 			const string str, 
 			const int textColor = White,
-			const int backgroundColor = Black);
+			const int backgroundColor = Black,
+			const bool checkStatus = true);
 
 		void setColor(
 			const int textColor, 
-			const int backgroundColor);
+			const int backgroundColor,
+			const bool checkStatus = true);
 
 		void gotoXY(
 			const int x,
-			const int y);
+			const int y,
+			const bool checkStatus = true);
 
 		void fillLine(
 			const string mid,
