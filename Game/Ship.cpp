@@ -5,7 +5,7 @@ Ship::Ship() {
 };
 
 const int Ship::size() {
-	return cells.size();
+	return static_cast<int>(cells.size());
 };
 
 const int Ship::type() {

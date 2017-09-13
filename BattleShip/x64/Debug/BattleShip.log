@@ -1,26 +1,8 @@
 ﻿  TimerPanel.cpp
-d:\projects\c++ projects\battleship\panels\timerpanel.cpp(24): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-d:\projects\c++ projects\battleship\panels\timerpanel.cpp(51): warning C4267: '=': conversion from 'size_t' to 'SHORT', possible loss of data
   StatePanel.cpp
-d:\projects\c++ projects\battleship\panels\statepanel.cpp(44): warning C4267: '=': conversion from 'size_t' to 'SHORT', possible loss of data
-d:\projects\c++ projects\battleship\panels\statepanel.cpp(64): warning C4267: '=': conversion from 'size_t' to 'SHORT', possible loss of data
-  Panel.cpp
   ExitPanel.cpp
-d:\projects\c++ projects\battleship\panels\exitpanel.cpp(16): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  StateMenu.cpp
-  Menu.cpp
-  MainMenu.cpp
-  ExitMenu.cpp
-  main.cpp
   Ship.cpp
-d:\projects\c++ projects\battleship\game\ship.cpp(8): warning C4267: 'return': conversion from 'size_t' to 'const int', possible loss of data
-  Game.cpp
-  Field.cpp
-  Cell.cpp
-  Bot.cpp
-  BattleShip.cpp
   Console.cpp
-d:\projects\c++ projects\battleship\console.cpp(48): warning C4838: conversion from 'const int' to 'SHORT' requires a narrowing conversion
   Generating Code...
   BattleShip.vcxproj -> D:\Projects\C++ Projects\BattleShip\x64\Debug\BattleShip.exe
   BattleShip.vcxproj -> D:\Projects\C++ Projects\BattleShip\x64\Debug\BattleShip.pdb (Partial PDB)

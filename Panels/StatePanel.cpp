@@ -41,7 +41,7 @@ void StatePanel::redrawPanel(
 	counter_.push_back(0);
 
 	COORD centerPos;
-	centerPos.X = position.X + (description.length() - counter_.length()) / 2;
+	centerPos.X = position.X + static_cast<SHORT>(description.length() - counter_.length()) / 2;
 	centerPos.Y = position.Y + 1;
 
 	console->drawText(centerPos.X, centerPos.Y, counter_, textColor, backgroundColor);
@@ -61,7 +61,7 @@ void StatePanel::redrawPanel(
 	counter_.push_back(0);
 
 	COORD centerPos;
-	centerPos.X = position.X + (description.length() - counter_.length()) / 2;
+	centerPos.X = position.X + static_cast<SHORT>(description.length() - counter_.length()) / 2;
 	centerPos.Y = position.Y + 1;
 
 	console->drawText(centerPos.X, centerPos.Y, counter_, textColor, backgroundColor);

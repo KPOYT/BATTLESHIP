@@ -13,7 +13,7 @@ ExitPanel::ExitPanel(
 	const string desc):Panel(x, y, desc) {};
 		
 ExitPanel::~ExitPanel(){
-	console->fillLine(" ", description.length() + 9, position.X, position.Y, false);
+	console->fillLine(" ", static_cast<int>(description.length()) + 9, position.X, position.Y, false);
 };
 
 const int ExitPanel::show()

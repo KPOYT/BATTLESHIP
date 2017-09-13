@@ -21,7 +21,7 @@ TimerPanel::TimerPanel(
 
 TimerPanel::~TimerPanel()
 {
-	console->fillLine(" ", timer_.length(), position.X, position.Y + 1, false);
+	console->fillLine(" ", static_cast<int>(timer_.length()), position.X, position.Y + 1, false);
 };
 
 const int TimerPanel::show()
@@ -48,7 +48,7 @@ void TimerPanel::redrawPanel(
 	timer_.push_back(0);
 
 	COORD centerPos;
-	centerPos.X = position.X + (description.length() - timer_.length()) / 2;
+	centerPos.X = position.X + static_cast<SHORT>(description.length() - timer_.length()) / 2;
 	centerPos.Y = position.Y + 1;
 			
 	console->drawText(centerPos.X, centerPos.Y, timer_, textColor, backgroundColor);

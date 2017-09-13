@@ -45,7 +45,7 @@ void Console::gotoXY(
 	 const int x,
 	 const int y)
 {
-	COORD coord = { x, y };
+	COORD coord = { static_cast<SHORT>(x), static_cast<SHORT>(y) };
 	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleCursorPosition(hStdOut, coord);
 }
