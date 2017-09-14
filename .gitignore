@@ -4,3 +4,6 @@
 .vs/BattleShip/v15/Browse.VC.opendb
 .vs/BattleShip/v15/ipch/AutoPCH/1d781ce25b551e38/STATEPANEL.ipch
 *.ipch
+x64/Debug/BattleShip.exe
+x64/Debug/BattleShip.ilk
+x64/Debug/BattleShip.pdb
