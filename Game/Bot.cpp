@@ -34,7 +34,8 @@ const bool Bot::checkKilledShip(Ship* const ship) {
 			|| cell.X >= Config::FIELD_WIDTH 
 			|| cell.Y >= Config::FIELD_HEIGHT) continue;
 
-		if(grid[cell.X][cell.Y]->getStatus() != Cell::Hit)
+		//if(grid[cell.X][cell.Y]->getStatus() != Cell::Hit)
+		if (grid[cell.X][cell.Y]->getStatus() == Cell::Full && grid[cell.X][cell.Y]->getState() == Cell::NotClicked)
 			return false;
 	}
 			

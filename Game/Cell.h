@@ -21,22 +21,27 @@ class Cell {
 			 const int backgroundColor = Console::Black,
 			 const int width = Config::CELL_VIEW_WIDTH,
 			 const int height = Config::CELL_VIEW_HEIGHT,
-			 const int status = Cell::Empty,
 			 const bool mode = Cell::Inactive);
 
-		void draw();
-		void setStatus(const int);
-		const int getStatus();
-		void setMode(const bool);
-		const bool getMode();
-		void openCell(const bool);
+		virtual void draw();
+		virtual const bool getState();
+		virtual void setState(const bool);
+		virtual const bool getStatus();
+		virtual void setMode(const bool);
+		virtual const bool getMode();
+		virtual void openCell(const bool);
+
+		enum CellState
+		{
+			Clicked = true,
+			NotClicked = false
+		};
 
 		enum CellStatus
 		{
-			Empty = 0,
-			Full = 1,
-			Hit = 2,
-			Miss = 3
+			Empty = false,
+			Full = true,
+			Undefined = NULL
 		};
 
 		enum CellMode
@@ -44,9 +49,9 @@ class Cell {
 			Active = true,
 			Inactive = false
 		};
-	private:
-		const int getTextColor();
-		const int getBackgroundColor();
+	protected:
+		virtual const int getTextColor();
+		virtual const int getBackgroundColor();
 
 		int x_;
 		int y_;
@@ -57,5 +62,6 @@ class Cell {
 		int status_;
 		bool mode_;
 
+		bool isClicked_;
 		bool isOpenCell_;
 };

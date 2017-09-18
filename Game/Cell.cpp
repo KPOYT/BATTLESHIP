@@ -6,7 +6,6 @@ Cell::Cell(const int x,
 			 const int backgroundColor,
 			 const int width,
 			 const int height,
-			 const int status,
 			 const bool mode)
 {
 	x_ = x;
@@ -15,7 +14,7 @@ Cell::Cell(const int x,
 	height_ = height;
 	textColor_ = textColor;
 	backgroundColor_ = backgroundColor;
-	status_ = status;
+	isClicked_ = NotClicked;
 	mode_ = mode;
 };
 
@@ -29,12 +28,16 @@ void Cell::draw() {
 	console->setColor(Console::White, Console::Black);
 };
 
-void Cell::setStatus(const int value) {
-	status_ = value;
+const bool Cell::getState() {
+	return isClicked_;
 };
 
-const int Cell::getStatus() {
-	return status_;
+void Cell::setState(const bool value) {
+	isClicked_ = value;
+};
+
+const bool Cell::getStatus() {
+	return Undefined;
 };
 
 void Cell::setMode(const bool value) {
@@ -53,21 +56,6 @@ const int Cell::getTextColor() {
 	if(mode_ == Active)
 		return Console::Yellow;
 	else {
-		switch(status_){
-			case Full:{
-				if(isOpenCell_)
-					return Console::Cyan;
-
-				break;
-			}
-			case Miss:{
-				return Console::Magenta;
-			}
-			case Hit:{
-				return Console::Red;
-			}
-		}
-
 		return textColor_;
 	}
 }
@@ -76,21 +64,6 @@ const int Cell::getBackgroundColor() {
 	if(mode_ == Active)
 		return Console::Yellow;
 	else {
-		switch(status_){
-			case Full:{
-				if(isOpenCell_)
-					return Console::Cyan;
-
-				break;
-			}
-			case Miss:{
-				return Console::Magenta;
-			}
-			case Hit:{
-				return Console::Red;
-			}
-		}
-
 		return backgroundColor_;
 	}
 }

@@ -12,6 +12,16 @@
 #include "Cell.h"
 #endif
 
+#ifndef EMPTYCELL_H
+#define EMPTYCELL_H
+#include "EmptyCell.h"
+#endif
+
+#ifndef FULLCELL_H
+#define FULLCELL_H
+#include "FullCell.h"
+#endif
+
 #ifndef BOT_H
 #define BOT_H
 #include "Bot.h"
