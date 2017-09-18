@@ -41,7 +41,7 @@ Field::~Field()
 };
 
 void Field::generate() {
-	int sheeps[] = {4,3,3,2,2,2,1,1,1,1};
+	const int* sheeps = Config::SHIPS_TYPE();
 
 	clearField();
 
@@ -121,7 +121,6 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 			for(int i = 0; i < shipType; i++){
 				if(rotate < 5)
 				{
-					//grid_[x+i][y]->setStatus(Cell::Full);
 					delete grid_[x+i][y];
 					grid_[x+i][y] = new FullCell(coords.X + (x+i) * Config::CELL_VIEW_WIDTH,
 						coords.Y + y * Config::CELL_VIEW_HEIGHT);
@@ -133,7 +132,6 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 				}
 				else
 				{
-					//grid_[x][y+i]->setStatus(Cell::Full);
 					delete grid_[x][y+i];
 					grid_[x][y+i] = new FullCell(coords.X + x * Config::CELL_VIEW_WIDTH,
 						coords.Y + (y+i) * Config::CELL_VIEW_HEIGHT);
@@ -224,7 +222,6 @@ const int Field::walk() {
 				case VK_RETURN:
 					switch(grid_[position_.X][position_.Y]->getStatus()){
 						case Cell::Empty: {
-							//grid_[position_.X][position_.Y]->setStatus(Cell::Miss);
 							grid_[position_.X][position_.Y]->setState(Cell::Clicked);
 							active_ = false;
 							isDone = true;
@@ -234,7 +231,6 @@ const int Field::walk() {
 							return Unsuccessful;
 						}
 						case Cell::Full: {
-							//grid_[position_.X][position_.Y]->setStatus(Cell::Hit);
 							grid_[position_.X][position_.Y]->setState(Cell::Clicked);
 							active_ = false;
 							isDone = true;
@@ -273,7 +269,6 @@ const int Field::walkByBot() {
 
 	switch(grid_[coord.X][coord.Y]->getStatus()){
 		case Cell::Empty: {
-			//grid_[coord.X][coord.Y]->setStatus(Cell::Miss);
 			grid_[coord.X][coord.Y]->setState(Cell::Clicked);
 			drawCell(coord, Cell::Inactive);
 			drawShips();
@@ -281,7 +276,6 @@ const int Field::walkByBot() {
 			return Unsuccessful;
 		}
 		case Cell::Full: {
-			//grid_[coord.X][coord.Y]->setStatus(Cell::Hit);
 			grid_[coord.X][coord.Y]->setState(Cell::Clicked);
 			fillCellsAroundKilledShip();
 			drawCell(position_, Cell::Inactive);
@@ -339,7 +333,6 @@ void Field::fillCellsAroundKilledShip() {
 
 			if(checkPositionAroundShip(ship, coord))
 				grid_[coord.X][coord.Y]->setState(Cell::Clicked);
-				//grid_[coord.X][coord.Y]->setStatus(Cell::Miss);
 		}
 	}
 }
@@ -399,7 +392,6 @@ const bool Field::checkPositionAroundShip(Ship* const ship, const COORD position
 bool const Field::isKilledShip(Ship* const ship) {
 	for(int j = 0; j < ship->size(); j++){
 		COORD cell = ship->getCell(j);
-		//if(grid_[cell.X][cell.Y]->getStatus() != Cell::Hit)
 		if(grid_[cell.X][cell.Y]->getStatus() == Cell::Full && grid_[cell.X][cell.Y]->getState() == Cell::NotClicked)
 			return false;
 	}

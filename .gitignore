@@ -43,3 +43,17 @@ BattleShip/x64/Debug/Panel.obj
 BattleShip/x64/Debug/Ship.obj
 BattleShip/x64/Debug/StateMenu.obj
 BattleShip/x64/Debug/StatePanel.obj
+BattleShip/BattleShip.vcxproj
+BattleShip/BattleShip.vcxproj
+BattleShip/BattleShip.vcxproj.filters
+BattleShip/Debug/BattleShip.obj
+BattleShip/Debug/BattleShip.tlog/BattleShip.lastbuildstate
+*.obj
+*.tlog
+BattleShip/BattleShip.vcxproj
+BattleShip/BattleShip.vcxproj.filters
+BattleShip/Debug/vc141.idb
+BattleShip/Debug/vc141.pdb
+Debug/BattleShip.pdb
+Debug/BattleShip.ilk
+Debug/BattleShip.exe
