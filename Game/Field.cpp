@@ -6,8 +6,8 @@ Field::Field()
 {
 	x_ = 0;
 	y_ = 0;
-	width_ = Config::FIELD_WIDTH;
-	height_ = Config::FIELD_HEIGHT;
+	width_ = Config::FIELD_VIEW_WIDTH;
+	height_ = Config::FIELD_VIEW_HEIGHT;
 	active_ = false;
 	position_.X = 0;
 	position_.Y = 0;
@@ -15,14 +15,12 @@ Field::Field()
 };
 
 Field::Field(const int x,
-	const int y,
-	const int width,
-	const int height)
+	const int y)
 {
 	x_ = x;
 	y_ = y;
-	width_ = width;
-	height_ = height;
+	width_ = Config::FIELD_VIEW_WIDTH;
+	height_ = Config::FIELD_VIEW_HEIGHT;
 	active_ = false;
 	position_.X = 0;
 	position_.Y = 0;

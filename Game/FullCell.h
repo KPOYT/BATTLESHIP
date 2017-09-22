@@ -7,10 +7,6 @@ class FullCell : public Cell {
 	public:
 		FullCell(const int x,
 			const int y,
-			const int textColor = Console::White,
-			const int backgroundColor = Console::Black,
-			const int width = Config::CELL_VIEW_WIDTH,
-			const int height = Config::CELL_VIEW_HEIGHT,
 			const bool mode = Cell::Inactive);
 
 		const bool getStatus();

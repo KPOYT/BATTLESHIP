@@ -2,23 +2,13 @@
 
 EmptyCell::EmptyCell(const int x,
 	const int y,
-	const int textColor,
-	const int backgroundColor,
-	const int width,
-	const int height,
-	const bool mode):Cell(x, y, textColor, backgroundColor, width, height, mode) {};
+	const bool mode):Cell(x, y, mode) {};
 
-const bool EmptyCell::getStatus() {
-	return Empty;
-};
+const bool EmptyCell::getStatus() { return Empty; };
 
-const bool EmptyCell::getState() {
-	return isClicked_;
-};
+const bool EmptyCell::getState() { return isClicked_; };
 
-void EmptyCell::setState(const bool value) {
-	isClicked_ = value;
-};
+void EmptyCell::setState(const bool value) { isClicked_ = value; };
 
 const int EmptyCell::getTextColor() {
 	if (mode_ == Active)

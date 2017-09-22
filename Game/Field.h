@@ -48,9 +48,7 @@ class Field {
 	public:
 		Field();
 		Field(const int x,
-			 const int y,
-			 const int width = Config::FIELD_VIEW_WIDTH,
-			 const int height = Config::FIELD_VIEW_HEIGHT);
+			 const int y);
 		~Field();
 		
 		void draw();

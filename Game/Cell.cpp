@@ -2,18 +2,14 @@
 
 Cell::Cell(const int x,
 			 const int y,
-			 const int textColor,
-			 const int backgroundColor,
-			 const int width,
-			 const int height,
 			 const bool mode)
 {
 	x_ = x;
 	y_ = y;
-	width_ = width;
-	height_ = height;
-	textColor_ = textColor;
-	backgroundColor_ = backgroundColor;
+	textColor_ = Console::White;
+	backgroundColor_ = Console::Black;
+	width_ = Config::CELL_VIEW_WIDTH;
+	height_ = Config::CELL_VIEW_HEIGHT;
 	isClicked_ = NotClicked;
 	mode_ = mode;
 };
