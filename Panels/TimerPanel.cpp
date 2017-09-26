@@ -40,7 +40,6 @@ void TimerPanel::redrawPanel(
 	 const int textColor,
 	 const int backgroundColor)
 {
-	console->setColor(console->Black, console->Black);
 	timer_.clear();
 
 	timer_.push_back(0);
@@ -52,5 +51,4 @@ void TimerPanel::redrawPanel(
 	centerPos.Y = position.Y + 1;
 			
 	console->drawText(centerPos.X, centerPos.Y, timer_, textColor, backgroundColor);
-	console->setColor(console->Black, console->Black);
 }

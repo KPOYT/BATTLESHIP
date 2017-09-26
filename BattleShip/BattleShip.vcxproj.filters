@@ -70,11 +70,11 @@
     <ClCompile Include="..\Game\EmptyCell.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\Config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Config.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Console.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -125,6 +125,9 @@
     </ClInclude>
     <ClInclude Include="..\Game\EmptyCell.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Config.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

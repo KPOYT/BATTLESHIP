@@ -13,9 +13,7 @@ Console* Console::Instance(){
 	return _instance;
 }
 
-const bool Console::status(){
-	return _status;
-}
+const bool Console::status(){ return _status; }
 
 void Console::drawText(
 	 const int x,

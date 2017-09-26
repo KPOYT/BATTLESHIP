@@ -4,13 +4,9 @@ Ship::Ship() {
 	type_ = Vertical;
 };
 
-const int Ship::size() {
-	return static_cast<int>(cells.size());
-};
+const int Ship::size() { return static_cast<int>(cells.size()); };
 
-const int Ship::type() {
-	return type_;
-};
+const int Ship::type() { return type_; };
 
 void Ship::addCell(const COORD cell) {
 	cells.push_back(cell);

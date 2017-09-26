@@ -24,29 +24,17 @@ void Cell::draw() {
 	console->setColor(Console::White, Console::Black);
 };
 
-const bool Cell::getState() {
-	return isClicked_;
-};
+const bool Cell::getState() { return isClicked_; };
 
-void Cell::setState(const bool value) {
-	isClicked_ = value;
-};
+void Cell::setState(const bool value) { isClicked_ = value; };
 
-const bool Cell::getStatus() {
-	return Undefined;
-};
+const bool Cell::getStatus() { return Undefined; };
 
-void Cell::setMode(const bool value) {
-	mode_ = value;
-};
+void Cell::setMode(const bool value) { mode_ = value; };
 
-const bool Cell::getMode() {
-	return mode_;
-};
+const bool Cell::getMode() { return mode_; };
 
-void Cell::openCell(const bool isOpenCell) {
-	isOpenCell_ = isOpenCell;
-};
+void Cell::openCell(const bool isOpenCell) { isOpenCell_ = isOpenCell; };
 
 const int Cell::getTextColor() {
 	if(mode_ == Active)

@@ -33,7 +33,10 @@ void timerUpdate(void* pParams){
 			ptr->panel->redrawPanel(time);
 			Sleep(1000);
 		}
-	}while(!ptr->panel->isFinished);
+		else
+			Sleep(30);
+
+	} while(!ptr->panel->isFinished);
 }
 
 void Game::draw() {

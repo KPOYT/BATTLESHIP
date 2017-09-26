@@ -220,6 +220,8 @@ const int Field::walk() {
 				case VK_RETURN:
 					switch(grid_[position_.X][position_.Y]->getStatus()){
 						case Cell::Empty: {
+							if (grid_[position_.X][position_.Y]->getState() == Cell::Clicked) break;
+
 							grid_[position_.X][position_.Y]->setState(Cell::Clicked);
 							active_ = false;
 							isDone = true;
@@ -229,6 +231,8 @@ const int Field::walk() {
 							return Unsuccessful;
 						}
 						case Cell::Full: {
+							if (grid_[position_.X][position_.Y]->getState() == Cell::Clicked) break;
+
 							grid_[position_.X][position_.Y]->setState(Cell::Clicked);
 							active_ = false;
 							isDone = true;
@@ -430,13 +434,9 @@ void Field::drawShips(){
 	}
 }
 
-const int Field::checkCell(const COORD position){
-	return grid_[position.X][position.Y]->getStatus();
-}
+const int Field::checkCell(const COORD position){ return grid_[position.X][position.Y]->getStatus(); }
 
-const int Field::checkCell(const int x, const int y){
-	return grid_[x][y]->getStatus();
-}
+const int Field::checkCell(const int x, const int y){ return grid_[x][y]->getStatus(); }
 
 void Field::drawCell(COORD position, const bool mode){
 	console->setColor(console->White, console->Black);

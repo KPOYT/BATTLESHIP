@@ -1,11 +1,11 @@
 #include "Bot.h"
 
-const COORD Bot::findCellToStrike(){
+const COORD Bot::findCellToStrike() {
 	COORD coord;
 
 	srand(GetTickCount());
 
-	int time = 500 + rand() % 5000;
+	int time = Config::MIN_BOT_WAITING + rand() % Config::MAX_BOT_WAITING;
 
 	coord = findRandomPlace();
 
@@ -14,16 +14,7 @@ const COORD Bot::findCellToStrike(){
 	return coord;
 };
 
-void Bot::clearCells(){
-	for(int i = 0; i < 4; i++){
-		cells_[i].X = -1;
-		cells_[i].Y = -1;
-	}
-};
-
-const int Bot::checkCell(const int x, const int y){
-	return grid[x][y]->getStatus();
-}
+const int Bot::checkCell(const int x, const int y) { return grid[x][y]->getStatus(); }
 
 const bool Bot::checkKilledShip(Ship* const ship) {
 	for(int j = 0; j < ship->size(); j++){
@@ -41,7 +32,7 @@ const bool Bot::checkKilledShip(Ship* const ship) {
 	return true;
 }
 
-Ship* const Bot::findShipByPosition(const int x, const int y){
+Ship* const Bot::findShipByPosition(const int x, const int y) {
 	COORD coord;
 	coord.X = x;
 	coord.Y = y;
@@ -82,9 +73,7 @@ const COORD Bot::findRandomPlace() {
 					size_ = ship->size();
 					cells_[0] = coord;
 					type_ = Unknown;
-				} 
-				else
-					clearCells();
+				}
 
 				isDone = true;
 			break;
