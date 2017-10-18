@@ -1,5 +1,3 @@
-#include <conio.h>
-#include <process.h>
 #include "Game.h"
 
 Game::Game(){
@@ -24,7 +22,7 @@ typedef struct
 
 void timerUpdate(void* pParams){
 	MsParams * ptr = (MsParams *)pParams;
-	Console* console = Console::Instance();
+	OSConsole* console = OS::GetOSFactory()->GetConsole();
 	
 	do {
 		bool isBusy = console->status();
@@ -51,7 +49,7 @@ void Game::draw() {
 	
 	statePanel_ = new StatePanel(38, 10, "Turn:");
 	statePanel_->show();
-	statePanel_->redrawPanel("Your", Console::Green);
+	statePanel_->redrawPanel("Your", OSConsole::Green);
 
 	userStatePanel_ = new StatePanel(4, 5);
 	userStatePanel_->show();
@@ -78,7 +76,7 @@ void Game::start() {
 		int success;
 		if(status_ == UserTurn)
 		{
-			statePanel_->redrawPanel("Your", Console::Green);
+			statePanel_->redrawPanel("Your", OSConsole::Green);
 
 			success = botField_->walk();
 
@@ -104,7 +102,7 @@ void Game::start() {
 		}
 		else if(status_ == BotTurn)
 		{
-			statePanel_->redrawPanel("Bot", Console::Red);
+			statePanel_->redrawPanel("Bot", OSConsole::Red);
 
 			success = userField_->walkByBot();
 			

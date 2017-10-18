@@ -14,12 +14,15 @@
     <Filter Include="Game">
       <UniqueIdentifier>{026f283d-a480-4c53-ba40-8f1138fdff8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ApplicationOS">
+      <UniqueIdentifier>{5deacd5a-8561-421c-a5a0-8fc554b25955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ApplicationOS\WinOS">
+      <UniqueIdentifier>{880de61c-4ede-485b-8e8d-bad426ae46aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Menus\ExitMenu.cpp">
@@ -70,14 +73,26 @@
     <ClCompile Include="..\Game\EmptyCell.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\Config.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\ApplicationOS\OS.cpp">
+      <Filter>ApplicationOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ApplicationOS\OSConfig.cpp">
+      <Filter>ApplicationOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ApplicationOS\OSConsole.cpp">
+      <Filter>ApplicationOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ApplicationOS\WinOS\WinOSConfig.cpp">
+      <Filter>ApplicationOS\WinOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ApplicationOS\WinOS\WinOSConsole.cpp">
+      <Filter>ApplicationOS\WinOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ApplicationOS\WinOS\WinOSFactory.cpp">
+      <Filter>ApplicationOS\WinOS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Console.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Menus\ExitMenu.h">
       <Filter>Menus</Filter>
     </ClInclude>
@@ -126,8 +141,26 @@
     <ClInclude Include="..\Game\EmptyCell.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\Config.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="..\ApplicationOS\OS.h">
+      <Filter>ApplicationOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ApplicationOS\OSConfig.h">
+      <Filter>ApplicationOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ApplicationOS\OSConsole.h">
+      <Filter>ApplicationOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ApplicationOS\OSFactory.h">
+      <Filter>ApplicationOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ApplicationOS\WinOS\WinOSConfig.h">
+      <Filter>ApplicationOS\WinOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ApplicationOS\WinOS\WinOSConsole.h">
+      <Filter>ApplicationOS\WinOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ApplicationOS\WinOS\WinOSFactory.h">
+      <Filter>ApplicationOS\WinOS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

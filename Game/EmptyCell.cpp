@@ -12,11 +12,11 @@ void EmptyCell::setState(const bool value) { isClicked_ = value; };
 
 const int EmptyCell::getTextColor() {
 	if (mode_ == Active)
-		return Console::Yellow;
+		return OSConsole::Yellow;
 	else {
 		switch (isClicked_) {
 			case Clicked: {
-				return Console::Magenta;
+				return OSConsole::Magenta;
 			}
 		}
 
@@ -26,11 +26,11 @@ const int EmptyCell::getTextColor() {
 
 const int EmptyCell::getBackgroundColor() {
 	if (mode_ == Active)
-		return Console::Yellow;
+		return OSConsole::Yellow;
 	else {
 		switch (isClicked_) {
 			case Clicked: {
-				return Console::Magenta;
+				return OSConsole::Magenta;
 			}
 		}
 

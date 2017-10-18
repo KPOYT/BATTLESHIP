@@ -1,8 +1,8 @@
 #include <conio.h>
 
-#ifndef CONSOLE_H
-#define CONSOLE_H
-#include "..\Console.h"
+#ifndef OS_H
+#define OS_H
+#include "..\ApplicationOS\OS.h"
 #endif
 
 using namespace std;
@@ -23,7 +23,7 @@ class Menu {
 		virtual void redrawMenu(const int);
 		virtual const int checkKeys(int mode);
 
-		Console* console;
+		OSConsole* console;
 
 		COORD position;
 		string description;

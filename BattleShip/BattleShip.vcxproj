@@ -111,8 +111,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Config.cpp" />
-    <ClCompile Include="..\Console.cpp" />
+    <ClCompile Include="..\ApplicationOS\OS.cpp" />
+    <ClCompile Include="..\ApplicationOS\OSConfig.cpp" />
+    <ClCompile Include="..\ApplicationOS\OSConsole.cpp" />
+    <ClCompile Include="..\ApplicationOS\WinOS\WinOSConfig.cpp" />
+    <ClCompile Include="..\ApplicationOS\WinOS\WinOSConsole.cpp" />
+    <ClCompile Include="..\ApplicationOS\WinOS\WinOSFactory.cpp" />
     <ClCompile Include="..\Game\BattleShip.cpp" />
     <ClCompile Include="..\Game\Bot.cpp" />
     <ClCompile Include="..\Game\Cell.cpp" />
@@ -132,8 +136,13 @@
     <ClCompile Include="..\Panels\TimerPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Config.h" />
-    <ClInclude Include="..\Console.h" />
+    <ClInclude Include="..\ApplicationOS\OS.h" />
+    <ClInclude Include="..\ApplicationOS\OSConfig.h" />
+    <ClInclude Include="..\ApplicationOS\OSConsole.h" />
+    <ClInclude Include="..\ApplicationOS\OSFactory.h" />
+    <ClInclude Include="..\ApplicationOS\WinOS\WinOSConfig.h" />
+    <ClInclude Include="..\ApplicationOS\WinOS\WinOSConsole.h" />
+    <ClInclude Include="..\ApplicationOS\WinOS\WinOSFactory.h" />
     <ClInclude Include="..\Game\BattleShip.h" />
     <ClInclude Include="..\Game\Bot.h" />
     <ClInclude Include="..\Game\Cell.h" />

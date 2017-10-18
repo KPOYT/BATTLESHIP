@@ -12,17 +12,17 @@ void FullCell::setState(const bool value) { isClicked_ = value; };
 
 const int FullCell::getTextColor() {
 	if (mode_ == Active)
-		return Console::Yellow;
+		return OSConsole::Yellow;
 	else {
 		switch (isClicked_) {
 			case NotClicked: {
 				if (isOpenCell_)
-					return Console::Cyan;
+					return OSConsole::Cyan;
 					
 				break;
 			}
 			case Clicked: {
-				return Console::Red;
+				return OSConsole::Red;
 			}
 		}
 
@@ -32,17 +32,17 @@ const int FullCell::getTextColor() {
 
 const int FullCell::getBackgroundColor() {
 	if (mode_ == Active)
-		return Console::Yellow;
+		return OSConsole::Yellow;
 	else {
 		switch (isClicked_) {
 			case NotClicked: {
 				if (isOpenCell_)
-					return Console::Cyan;
+					return OSConsole::Cyan;
 
 				break;
 			}
 			case Clicked: {
-				return Console::Red;
+				return OSConsole::Red;
 			}
 		}
 

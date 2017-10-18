@@ -5,7 +5,7 @@ const COORD Bot::findCellToStrike() {
 
 	srand(GetTickCount());
 
-	int time = Config::MIN_BOT_WAITING + rand() % Config::MAX_BOT_WAITING;
+	int time = OSConfig::MIN_BOT_WAITING + rand() % OSConfig::MAX_BOT_WAITING;
 
 	coord = findRandomPlace();
 
@@ -22,8 +22,8 @@ const bool Bot::checkKilledShip(Ship* const ship) {
 
 		if(cell.X < 0 
 			|| cell.Y < 0 
-			|| cell.X >= Config::FIELD_WIDTH 
-			|| cell.Y >= Config::FIELD_HEIGHT) continue;
+			|| cell.X >= OSConfig::FIELD_WIDTH 
+			|| cell.Y >= OSConfig::FIELD_HEIGHT) continue;
 
 		if (grid[cell.X][cell.Y]->getStatus() == Cell::Full && grid[cell.X][cell.Y]->getState() == Cell::NotClicked)
 			return false;
@@ -37,7 +37,7 @@ Ship* const Bot::findShipByPosition(const int x, const int y) {
 	coord.X = x;
 	coord.Y = y;
 
-	for(int s = 0; s < Config::MAX_SHIPS; s++){
+	for(int s = 0; s < OSConfig::MAX_SHIPS; s++){
 		if(ships[s]->checkCell(coord))
 			return ships[s];
 	}
@@ -53,8 +53,8 @@ const COORD Bot::findRandomPlace() {
 	bool isDone = false;
 	do
 	{
-		int x = rand() % Config::FIELD_WIDTH;
-		int y = rand() % Config::FIELD_HEIGHT;
+		int x = rand() % OSConfig::FIELD_WIDTH;
+		int y = rand() % OSConfig::FIELD_HEIGHT;
 		
 		int c = checkCell(x, y);
 		switch(c){

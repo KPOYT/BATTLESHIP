@@ -6,22 +6,22 @@ Cell::Cell(const int x,
 {
 	x_ = x;
 	y_ = y;
-	textColor_ = Console::White;
-	backgroundColor_ = Console::Black;
-	width_ = Config::CELL_VIEW_WIDTH;
-	height_ = Config::CELL_VIEW_HEIGHT;
+	textColor_ = OSConsole::White;
+	backgroundColor_ = OSConsole::Black;
+	width_ = OSConfig::CELL_VIEW_WIDTH;
+	height_ = OSConfig::CELL_VIEW_HEIGHT;
 	isClicked_ = NotClicked;
 	mode_ = mode;
 };
 
 void Cell::draw() {
-	Console* console = Console::Instance();
+	OSConsole* console = OS::GetOSFactory()->GetConsole();
 	
 	console->setColor(getTextColor(), getBackgroundColor());
 
 	console->fillSquare(" ", width_, height_, x_, y_);
 
-	console->setColor(Console::White, Console::Black);
+	console->setColor(OSConsole::White, OSConsole::Black);
 };
 
 const bool Cell::getState() { return isClicked_; };
@@ -38,7 +38,7 @@ void Cell::openCell(const bool isOpenCell) { isOpenCell_ = isOpenCell; };
 
 const int Cell::getTextColor() {
 	if(mode_ == Active)
-		return Console::Yellow;
+		return OSConsole::Yellow;
 	else {
 		return textColor_;
 	}
@@ -46,7 +46,7 @@ const int Cell::getTextColor() {
 
 const int Cell::getBackgroundColor() {
 	if(mode_ == Active)
-		return Console::Yellow;
+		return OSConsole::Yellow;
 	else {
 		return backgroundColor_;
 	}

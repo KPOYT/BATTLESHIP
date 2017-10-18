@@ -1,5 +1,7 @@
 #include <iostream>
 #include <windows.h>
+#include <conio.h>
+#include <process.h>
 #include <time.h>
 
 #ifndef STATEMENU_H
@@ -11,10 +13,12 @@
 #define STATEPANEL_H
 #include "..\Panels\StatePanel.h"
 #endif
+
 #ifndef TIMERPANEL_H
 #define TIMERPANEL_H
 #include "..\Panels\TimerPanel.h"
 #endif
+
 #ifndef FIELD_H
 #define FIELD_H
 #include "Field.h"
@@ -33,7 +37,7 @@ class Game {
 		enum GameState
 		{
 			UserTurn = 0,
-			BotTurn	 = 1,
+			BotTurn  = 1,
 			Gameover = 2
 		};
 	private:

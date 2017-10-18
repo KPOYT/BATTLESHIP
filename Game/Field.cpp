@@ -1,17 +1,15 @@
-#include <conio.h>
-#include <time.h>
 #include "Field.h"
 
 Field::Field()
 {
 	x_ = 0;
 	y_ = 0;
-	width_ = Config::FIELD_VIEW_WIDTH;
-	height_ = Config::FIELD_VIEW_HEIGHT;
+	width_ = OSConfig::FIELD_VIEW_WIDTH;
+	height_ = OSConfig::FIELD_VIEW_HEIGHT;
 	active_ = false;
 	position_.X = 0;
 	position_.Y = 0;
-	console = Console::Instance();
+	console = OS::GetOSFactory()->GetConsole();
 };
 
 Field::Field(const int x,
@@ -19,31 +17,31 @@ Field::Field(const int x,
 {
 	x_ = x;
 	y_ = y;
-	width_ = Config::FIELD_VIEW_WIDTH;
-	height_ = Config::FIELD_VIEW_HEIGHT;
+	width_ = OSConfig::FIELD_VIEW_WIDTH;
+	height_ = OSConfig::FIELD_VIEW_HEIGHT;
 	active_ = false;
 	position_.X = 0;
 	position_.Y = 0;
-	console = Console::Instance();
+	console = OS::GetOSFactory()->GetConsole();
 };
 
 Field::~Field()
 {
-	for(int i = 0; i < Config::MAX_SHIPS; i++)
+	for(int i = 0; i < OSConfig::MAX_SHIPS; i++)
 		delete ships_[i];
 
-	for(int i = 0; i < Config::CELL_VIEW_WIDTH; i++){
-		for(int j = 0; j < Config::CELL_VIEW_HEIGHT; j++)
+	for(int i = 0; i < OSConfig::CELL_VIEW_WIDTH; i++){
+		for(int j = 0; j < OSConfig::CELL_VIEW_HEIGHT; j++)
 			delete grid_[i][j];
 	}
 };
 
 void Field::generate() {
-	const int* sheeps = Config::SHIPS_TYPE();
+	const int* sheeps = OSConfig::SHIPS_TYPE();
 
 	clearField();
 
-	for(int i = 0; i < Config::MAX_SHIPS; i++){
+	for(int i = 0; i < OSConfig::MAX_SHIPS; i++){
 		findPlaceToSheep(sheeps[i], i);
 	}
 }
@@ -53,10 +51,10 @@ void Field::clearField(){
 	coords.X = x_ + 1;
 	coords.Y = y_ + 1;
 
-	for(int i = 0; i < Config::FIELD_WIDTH; i++){
-		for(int j = 0; j < Config::FIELD_HEIGHT; j++){
-			grid_[i][j] = new EmptyCell(coords.X + i * Config::CELL_VIEW_WIDTH,
-				coords.Y + j * Config::CELL_VIEW_HEIGHT);
+	for(int i = 0; i < OSConfig::FIELD_WIDTH; i++){
+		for(int j = 0; j < OSConfig::FIELD_HEIGHT; j++){
+			grid_[i][j] = new EmptyCell(coords.X + i * OSConfig::CELL_VIEW_WIDTH,
+				coords.Y + j * OSConfig::CELL_VIEW_HEIGHT);
 		}
 	}
 }
@@ -69,9 +67,9 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 
 	do
 	{
-		int x = 0 + rand() % Config::FIELD_WIDTH;
-		int y = 0 + rand() % Config::FIELD_HEIGHT;
-		int rotate = 0 + rand() % Config::MAX_SHIPS;
+		int x = 0 + rand() % OSConfig::FIELD_WIDTH;
+		int y = 0 + rand() % OSConfig::FIELD_HEIGHT;
+		int rotate = 0 + rand() % OSConfig::MAX_SHIPS;
 		bool clear = true;
 
 		for(int i = -1; i <= shipType; i++)
@@ -79,30 +77,30 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 			for(int j = -1; j <= 1; j++)
 			{
 				if(rotate < 5){
-					if(x+i >= Config::FIELD_WIDTH && i < shipType) {
+					if(x+i >= OSConfig::FIELD_WIDTH && i < shipType) {
 						clear = false;
 						break;
 					}
 
 					if(x+i < 0 
 						|| y+j < 0 
-						|| x+i >= Config::FIELD_WIDTH 
-						|| y+j >= Config::FIELD_HEIGHT) continue;
+						|| x+i >= OSConfig::FIELD_WIDTH
+						|| y+j >= OSConfig::FIELD_HEIGHT) continue;
 
 					if(grid_[x+i][y+j]->getStatus() != Cell::Empty)
 						clear = false;
 				}
 				else
 				{
-					if(y+i >= Config::FIELD_HEIGHT && i < shipType) {
+					if(y+i >= OSConfig::FIELD_HEIGHT && i < shipType) {
 						clear = false;
 						break;
 					}
 
 					if(x+j < 0 
 						|| y+i < 0 
-						|| x+j >= Config::FIELD_WIDTH 
-						|| y+i >= Config::FIELD_HEIGHT) continue;
+						|| x+j >= OSConfig::FIELD_WIDTH
+						|| y+i >= OSConfig::FIELD_HEIGHT) continue;
 
 					if(grid_[x+j][y+i]->getStatus() != Cell::Empty)
 						clear = false;
@@ -120,8 +118,8 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 				if(rotate < 5)
 				{
 					delete grid_[x+i][y];
-					grid_[x+i][y] = new FullCell(coords.X + (x+i) * Config::CELL_VIEW_WIDTH,
-						coords.Y + y * Config::CELL_VIEW_HEIGHT);
+					grid_[x+i][y] = new FullCell(coords.X + (x+i) * OSConfig::CELL_VIEW_WIDTH,
+						coords.Y + y * OSConfig::CELL_VIEW_HEIGHT);
 					COORD pos;
 					pos.X = x+i;
 					pos.Y = y;
@@ -131,8 +129,8 @@ void Field::findPlaceToSheep(const int shipType, const int index){
 				else
 				{
 					delete grid_[x][y+i];
-					grid_[x][y+i] = new FullCell(coords.X + x * Config::CELL_VIEW_WIDTH,
-						coords.Y + (y+i) * Config::CELL_VIEW_HEIGHT);
+					grid_[x][y+i] = new FullCell(coords.X + x * OSConfig::CELL_VIEW_WIDTH,
+						coords.Y + (y+i) * OSConfig::CELL_VIEW_HEIGHT);
 					COORD pos;
 					pos.X = x;
 					pos.Y = y+i;
@@ -291,15 +289,15 @@ const int Field::walkByBot() {
 }
 
 void Field::updateBotGrid() {
-	for(int i = 0; i < Config::FIELD_WIDTH; i++){
-		for(int j = 0; j < Config::FIELD_HEIGHT; j++){
+	for(int i = 0; i < OSConfig::FIELD_WIDTH; i++){
+		for(int j = 0; j < OSConfig::FIELD_HEIGHT; j++){
 			bot_.grid[i][j] = grid_[i][j];
 		}
 	}
 }
 
 void Field::updateBotShips() {
-	for(int i = 0; i < Config::MAX_SHIPS; i++){
+	for(int i = 0; i < OSConfig::MAX_SHIPS; i++){
 		bot_.ships[i] = ships_[i];
 	}
 }
@@ -327,10 +325,10 @@ void Field::fillCellsAroundKilledShip() {
 					break;
 			}
 
-			if(coord.X < 0 || coord.X >= Config::FIELD_WIDTH)
+			if(coord.X < 0 || coord.X >= OSConfig::FIELD_WIDTH)
 				continue;
 
-			if(coord.Y < 0 || coord.Y >= Config::FIELD_HEIGHT)
+			if(coord.Y < 0 || coord.Y >= OSConfig::FIELD_HEIGHT)
 				continue;
 
 			if(checkPositionAroundShip(ship, coord))
@@ -340,9 +338,9 @@ void Field::fillCellsAroundKilledShip() {
 }
 
 const int Field::leftShips(){
-	int max = Config::MAX_SHIPS;
+	int max = OSConfig::MAX_SHIPS;
 
-	for(int s = 0; s < Config::MAX_SHIPS; s++){
+	for(int s = 0; s < OSConfig::MAX_SHIPS; s++){
 		if(isKilledShip(ships_[s]))
 			max--;
 	};
@@ -351,7 +349,7 @@ const int Field::leftShips(){
 }
 
 Ship* const Field::getCurrentShip(){
-	for(int s = 0; s < Config::MAX_SHIPS; s++){
+	for(int s = 0; s < OSConfig::MAX_SHIPS; s++){
 		if(ships_[s]->checkCell(position_))
 			return ships_[s];
 	}
@@ -360,7 +358,7 @@ Ship* const Field::getCurrentShip(){
 }
 
 Ship* const Field::findShipByPosition(const COORD coord){
-	for(int s = 0; s < Config::MAX_SHIPS; s++){
+	for(int s = 0; s < OSConfig::MAX_SHIPS; s++){
 		if(ships_[s]->checkCell(coord))
 			return ships_[s];
 	}
@@ -373,7 +371,7 @@ Ship* const Field::findShipByPosition(const int x, const int y){
 	coord.X = x;
 	coord.Y = y;
 
-	for(int s = 0; s < Config::MAX_SHIPS; s++){
+	for(int s = 0; s < OSConfig::MAX_SHIPS; s++){
 		if(ships_[s]->checkCell(coord))
 			return ships_[s];
 	}
@@ -421,8 +419,8 @@ void Field::drawField(){
 void Field::drawShips(){
 	COORD coords;
 	
-	for(int i = 0; i < Config::FIELD_WIDTH; i++){
-		for(int j = 0; j < Config::FIELD_HEIGHT; j++){
+	for(int i = 0; i < OSConfig::FIELD_WIDTH; i++){
+		for(int j = 0; j < OSConfig::FIELD_HEIGHT; j++){
 			if(active_ && position_.X == i && position_.Y == j)
 				continue;
 

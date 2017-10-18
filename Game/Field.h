@@ -1,6 +1,13 @@
 #include <iostream>
 #include <windows.h>
+#include <conio.h>
+#include <time.h>
 #include <array>
+
+#ifndef OS_H
+#define OS_H
+#include "..\ApplicationOS\OS.h"
+#endif
 
 #ifndef EXITPANEL_H
 #define EXITPANEL_H
@@ -32,16 +39,6 @@
 #include "Ship.h"
 #endif
 
-#ifndef CONFIG_H
-#define CONFIG_H
-#include "..\Config.h"
-#endif
-
-#ifndef CONSOLE_H
-#define CONSOLE_H
-#include "..\Console.h"
-#endif
-
 using namespace std;
 
 class Field {
@@ -71,7 +68,7 @@ class Field {
 			Gameover = 103
 		};
 	protected:
-		Console* console;
+		OSConsole* console;
 	private:
 		void drawField();
 		void drawShips();
@@ -89,8 +86,8 @@ class Field {
 		Bot bot_;
 		COORD position_;
 		COORD oldPosition_;
-		Ship* ships_[Config::MAX_SHIPS];
-		Cell* grid_[Config::FIELD_WIDTH][Config::FIELD_HEIGHT];
+		Ship* ships_[OSConfig::MAX_SHIPS];
+		Cell* grid_[OSConfig::FIELD_WIDTH][OSConfig::FIELD_HEIGHT];
 		int x_;
 		int y_;
 		int width_;

@@ -1,10 +1,5 @@
 #include "StateMenu.h"
 
-StateMenu::StateMenu()
-{
-	console = Console::Instance();
-};
-
 const int StateMenu::show(
 	 const int playerShips,
 	 const int botShips,

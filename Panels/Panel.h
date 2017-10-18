@@ -1,6 +1,6 @@
 #include <conio.h>
 
-#ifndef CONFIG_H
+/*#ifndef CONFIG_H
 #define CONFIG_H
 #include "..\Config.h"
 #endif
@@ -8,6 +8,11 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 #include "..\Console.h"
+#endif*/
+
+#ifndef OS_H
+#define OS_H
+#include "..\ApplicationOS\OS.h"
 #endif
 
 using namespace std;
@@ -25,10 +30,10 @@ class Panel {
 	protected:
 		virtual void redrawMenu(
 							int mode, 
-							int textColor = 15, 
-							int backgroundColor = 0);
+							int textColor = OSConsole::White, 
+							int backgroundColor = OSConsole::Black);
 
-		Console* console;
+		OSConsole* console;
 		COORD position;
 		string description;
 };

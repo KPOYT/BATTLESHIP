@@ -23,13 +23,13 @@ class StatePanel : public Panel {
 
 		void redrawPanel(
 			const int count, 
-			const int textColor = Console::White,
-			const int backgroundColor = Console::Black);
+			const int textColor = OSConsole::White,
+			const int backgroundColor = OSConsole::Black);
 
 		void redrawPanel(
 			const string count,
-			const int textColor = Console::White,
-			const int backgroundColor = Console::Black);
+			const int textColor = OSConsole::White,
+			const int backgroundColor = OSConsole::Black);
 	private:
 		string counter_;
 };

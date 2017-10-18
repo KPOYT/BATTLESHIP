@@ -13,7 +13,7 @@ BattleShip* BattleShip::Instance(){
 }
 
 const int BattleShip::startGame(){
-	MainMenu* mainMenu = new MainMenu;
+	MainMenu* mainMenu = new MainMenu();
 	ExitMenu* exitMenu = new ExitMenu(33, 10);
 	Game* game;
 

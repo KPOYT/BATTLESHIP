@@ -5,14 +5,14 @@ Menu::Menu(const string desc)
 	position.X = 0;
 	position.Y = 0;
 	description = desc;
-	console = Console::Instance();
+	console = OS::GetOSFactory()->GetConsole();
 };
 
 Menu::Menu(const COORD pos, const string desc)
 {
 	position = pos;
 	description = desc;
-	console = Console::Instance();
+	console = OS::GetOSFactory()->GetConsole();
 };
 
 Menu::Menu(const int x,
@@ -22,7 +22,7 @@ Menu::Menu(const int x,
 	position.X = x;
 	position.Y = y;
 	description = desc;
-	console = Console::Instance();
+	console = OS::GetOSFactory()->GetConsole();
 };
 
 void Menu::redrawMenu(const int){};
@@ -34,7 +34,7 @@ const int Menu::show()
 	int mode = 0;
 	bool choise = false;
 
-	console->setColor(Console::Black,Console::Black);
+	console->setColor(OSConsole::Black,OSConsole::Black);
     system("cls");
 	
 	console->drawText(position.X, position.Y, description);

@@ -18,7 +18,7 @@ StatePanel::~StatePanel(){
 
 int const StatePanel::show()
 {  
-	int mode = Config::MAX_SHIPS;
+	int mode = OSConfig::MAX_SHIPS;
 	bool choise = false;
 	
 	console->drawText(position.X, position.Y, description);
