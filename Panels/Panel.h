@@ -1,21 +1,7 @@
-#include <conio.h>
-
-/*#ifndef CONFIG_H
-#define CONFIG_H
-#include "..\Config.h"
-#endif
-
-#ifndef CONSOLE_H
-#define CONSOLE_H
-#include "..\Console.h"
-#endif*/
-
 #ifndef OS_H
 #define OS_H
 #include "..\ApplicationOS\OS.h"
 #endif
-
-using namespace std;
 
 class Panel {
 	public:

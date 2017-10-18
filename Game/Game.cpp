@@ -94,7 +94,7 @@ void Game::start() {
 					StateMenu menu;
 					menu.show(userField_->leftShips(), botField_->leftShips(), time);
 					botField_->draw();
-					_getch();
+					OS::GetOSFactory()->GetConsole()->getCodeFromKeyboard();
 
 					status_ = Gameover;
 				}
@@ -120,7 +120,7 @@ void Game::start() {
 					StateMenu menu;
 					menu.show(userField_->leftShips(), botField_->leftShips(), time);
 					botField_->draw();
-					_getch();
+					OS::GetOSFactory()->GetConsole()->getCodeFromKeyboard();
 					
 					status_ = Gameover;
 				}

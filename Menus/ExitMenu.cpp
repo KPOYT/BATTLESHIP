@@ -30,10 +30,10 @@ const int ExitMenu::checkKeys(int mode){
 	bool isDone = false;
 	do 
 	{
-		int code = _getch();
+		int code = console->getCodeFromKeyboard();
 		if (code == 224)
 		{
-			code = _getch();
+			code = console->getCodeFromKeyboard();
 			switch(code) 
 			{
 			case 77: {
